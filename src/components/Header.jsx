@@ -1,0 +1,367 @@
+//Problem: Offcanvas is not closing on click offcanvas link
+import natrajalogo from "../assets/natarajalogo.jpg";
+import ebook from "../assets/ebook.png";
+import user from "../assets/user.png";
+import search from "../assets/search.png";
+import hamburger from "../assets/hamburger.png";
+import play from "../assets/play-button.png";
+import headphone from "../assets/headphone.png";
+import crossword from "../assets/crossword.png";
+import imagegallary from "../assets/image-gallery.png";
+import eye from "../assets/eye.png";
+import newsletter from "../assets/newsletter.png";
+import puzzle from "../assets/puzzle.png";
+import pen from "../assets/pen.png";
+import files from "../assets/files.png";
+import chat from "../assets/chat.png";
+import email from "../assets/email.png";
+import linkdin from "../assets/linkedin.png";
+import telegram from "../assets/telegram.png";
+import whatsapp from "../assets/whatsapp.png";
+import fire from "../assets/fire.gif";
+import { useNavigate } from "react-router-dom";
+
+function Header() {
+  let navigate = useNavigate();
+  return (
+    <div>
+      <header className="">
+        <div className="container">
+          <nav
+            className="navbar navbar1 align-items-end align-items-xl-center align-items-lg-center"
+            style={{ padding: "0px 0px 2px 0px" }}
+          >
+            {/* Offcanwas */}
+            <div
+              className="offcanvas offcanvas-start"
+              tabindex="-1"
+              id="offcanvasExample"
+              aria-labelledby="offcanvasExampleLabel"
+            >
+              <div className="offcanvas-header">
+                <span>
+                  {new Date().toLocaleDateString("en-US", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                  <a
+                    className="navbar-brand fs-6"
+                    style={{ marginLeft: "8px" }}
+                  >
+                    e-Paper
+                  </a>
+                </span>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="offcanvas-body">
+                <div>
+                  <div className="container">
+                    <div
+                      className="input-group shadow-sm"
+                      style={{ overflow: "hidden" }}
+                    >
+                      <input
+                        type="text"
+                        className="form-control border-0"
+                        placeholder="Search for topics,people,articles..."
+                        style={{ boxShadow: "none", fontSize: "12px" }}
+                      />
+                      <span className="input-group-text bg-white border-0">
+                        <i className="bi bi-search"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="container mt-4">
+                    <div
+                      className="row text-start shadow-sm"
+                      style={{ border: "0px", textDecoration: "none" }}
+                    >
+                      <div onClick={()=>navigate("technews")}  className="col-6 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red">Tech</a>
+                      </div>
+
+                      <div onClick={()=>navigate("jobnews")} className="col-6 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red">Jobs</a>
+                      </div>
+
+                      <div onClick={()=>navigate("indianews")} className="col-6 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red">India</a>
+                      </div>
+
+                      <div onClick={()=>navigate("worldnews")} className="col-6 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red">World</a>
+                      </div>
+
+                      <div onClick={()=>navigate("sportsnews")} className="col-6 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red">Sport</a>
+                      </div>
+
+                      <div onClick={()=>navigate("datanews")} className="col-6 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red">Data</a>
+                      </div>
+
+                      <div onClick={()=>navigate("healthnews")} className="col-6 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red">Health</a>
+                      </div>
+
+                      <div onClick={()=>navigate("sciencenews")} className="col-6 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red">Science</a>
+                      </div>
+
+                      <div onClick={()=>navigate("businessnews")} className="col-6 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red">Business</a>
+                      </div>
+
+                      <div onClick={()=>navigate("premium")} className="col-6 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red">Premium</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="container mt-4">
+                    <div
+                      className="row text-start shadow-sm"
+                      style={{ border: "0px", textDecoration: "none" }}
+                    >
+                      <div className="col-6 border-bottom border-dark py-1 black">
+                        <img src={play} width={25} height={25} alt="" />
+                        <a className="navbar-brand red">Videos</a>
+                      </div>
+
+                      <div  onClick={()=>navigate("/thebook")} className="col-6 border-bottom border-dark py-1 black">
+                        <img src={ebook} width={25} height={25} alt="" />
+                        <a className="navbar-brand red">eBooks</a>
+                      </div>
+
+                      <div className="col-6 border-bottom border-dark py-1 black">
+                        <img src={headphone} width={25} height={25} alt="" />
+                        <a className="navbar-brand red">Podcast</a>
+                      </div>
+
+                      <div className="col-6 border-bottom border-dark py-1 black">
+                        <img src={crossword} width={25} height={25} alt="" />
+                        <a className="navbar-brand red">Crossword</a>
+                      </div>
+
+                      <div className="col-6 border-bottom border-dark py-1 black">
+                        <img src={imagegallary} width={25} height={25} alt="" />
+                        <a className="navbar-brand red">Photos</a>
+                      </div>
+
+                      <div className="col-6 border-bottom border-dark py-1 black">
+                        <img src={newsletter} width={25} height={25} alt="" />
+                        <a className="navbar-brand red">Newsletter</a>
+                      </div>
+
+                      <div className="col-6 border-bottom border-dark py-1 black">
+                        <img src={eye} width={25} height={25} alt="" />
+                        <a className="navbar-brand red">Visual Story</a>
+                      </div>
+
+                      <div className="col-6 border-bottom border-dark py-1 black">
+                        <img src={pen} width={25} height={25} alt="" />
+                        <a className="navbar-brand red">Lit For Life</a>
+                      </div>
+
+                      <div className="col-6 border-bottom border-dark py-1 black">
+                        <img src={files} width={25} height={25} alt="" />
+                        <a className="navbar-brand red">Specials</a>
+                      </div>
+
+                      <div className="col-6 border-bottom border-dark py-1 black">
+                        <img src={puzzle} width={25} height={25} alt="" />
+                        <a className="navbar-brand red">The Huddle</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="container mt-4">
+                    <div
+                      className="row text-start shadow-sm"
+                      style={{ border: "0px", textDecoration: "none" }}
+                    >
+                      <div className="col-12 border-bottom border-dark py-1 black">
+                        <img src={fire} width={25} height={25} alt="" />
+                        <a className="" style={{ textDecoration: "none",color:"#B00020" }}>
+                          Live Now
+                        </a>
+                      </div>
+                      <div onClick={()=>navigate("/thebook")} className="col-12 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red fs-6">The Book</a>
+                      </div>
+                      <div className="col-12 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red fs-6">The Story</a>
+                      </div>
+                      <div className="col-12 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red fs-6">The Tech</a>
+                      </div>
+                      <div className="col-12 border-bottom border-dark py-1 black">
+                        <a className="navbar-brand red fs-6">The Jobs</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="dropdown mt-3">
+                  <div className="col-6 py-1 flex-column">
+                    <div>Connect with us</div>
+                    <div class="d-flex flex-row bd-highlight mb-3 black">
+                      <a>
+                        <img src={chat} width={20} height={20} alt="" />
+                      </a>
+                      <a>
+                        <img src={whatsapp} width={20} height={20} alt="" />
+                      </a>
+                      <a>
+                        <img src={email} width={20} height={20} alt="" />
+                      </a>
+                      <a>
+                        <img src={linkdin} width={20} height={20} alt="" />
+                      </a>
+                      <a>
+                        <img src={telegram} width={20} height={20} alt="" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Main Body of Navbar */}
+            <span className="d-none d-lg-block">
+              {new Date().toLocaleDateString("en-US", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+              <a className="navbar-brand fs-6" style={{ marginLeft: "8px" }}>
+                e-Paper
+              </a>
+            </span>
+            <span className="title" onClick={()=>navigate("/")}>
+              THE TECH TIMES
+              <img className="" src={natrajalogo} alt="I" />
+            </span>
+            <span
+              className=""
+              style={{ display: "flex", flexDirection: "column" }}
+            >
+              <span>
+                <a
+                  className="navbar-brand d-inline d-lg-none"
+                  onClick={()=>navigate("/thebook")}
+                  style={{ color: "black", fontSize: "12px", float: "left" }}
+                >
+                  <img src={ebook} alt="I" width={20} height={20} />
+                  eBooks
+                </a>
+                <a
+                  className="navbar-brand"
+                  style={{ color: "black", float: "right", fontSize: "12px" }}
+                >
+                  LOGIN
+                  <img src={user} alt="I" width={15} height={15} />
+                </a>
+              </span>
+              <span>
+                <a
+                  className="navbar-brand d-none d-lg-inline"
+                  onClick={()=>navigate("/thebook")}
+                  style={{ color: "black", fontSize: "12px" }}
+                >
+                  <img src={ebook} alt="I" width={20} height={20} />
+                  eBooks
+                </a>
+                <button style={{ fontSize: "12px" }}>SUBSCRIBE</button>
+                <span className="d-inline d-lg-none">
+                  <a
+                    data-bs-toggle="offcanvas"
+                    href="#offcanvasExample"
+                    role="button"
+                    aria-controls="offcanvasExample"
+                    style={{
+                      color: "black",
+                      border: "0px",
+                      marginLeft: "20px",
+                    }}
+                  >
+                    <img src={hamburger} alt="H" width={20} height={20} />
+                    <img
+                      src={search}
+                      alt="S"
+                      width={12}
+                      height={12}
+                      style={{ position: "relative" }}
+                    />
+                  </a>
+                </span>
+              </span>
+            </span>
+          </nav>
+          <nav className="navbar navbar2 d-none d-lg-block">
+            <span>
+              <a
+                data-bs-toggle="offcanvas"
+                href="#offcanvasExample"
+                role="button"
+                aria-controls="offcanvasExample"
+                style={{ color: "black", border: "0px" }}
+              >
+                <img src={hamburger} alt="H" width={25} height={20} />
+              </a>
+              <a
+                className="navbar-brand"
+                style={{
+                  color: "black",
+                  fontSize: "15px",
+                  marginRight: "100px",
+                }}
+              >
+                <img src={search} alt="S" width={20} height={20} />
+                Search
+              </a>
+              <a onClick={()=>navigate("technews")} className="navbar-brand red" style={{ border: "0px" }}>
+                Tech
+              </a>
+              <a onClick={()=>navigate("jobnews")} className="navbar-brand red" style={{ border: "0px" }}>
+                Jobs
+              </a>
+              <a onClick={()=>navigate("indianews")} className="navbar-brand red" style={{ border: "0px" }}>
+                India
+              </a>
+              <a  onClick={()=>navigate("worldnews")} className="navbar-brand red" style={{ border: "0px" }}>
+                World
+              </a>
+              <a onClick={()=>navigate("sportsnews")} className="navbar-brand red" style={{ border: "0px" }}>
+                Sport
+              </a>
+              <a onClick={()=>navigate("datanews")} className="navbar-brand red" style={{ border: "0px" }}>
+                Data
+              </a>
+              <a onClick={()=>navigate("healthnews")} className="navbar-brand red" style={{ border: "0px" }}>
+                Health
+              </a>
+              <a onClick={()=>navigate("opinionnews")} className="navbar-brand red" style={{ border: "0px" }}>
+                Opinion
+              </a>
+              <a onClick={()=>navigate("sciencenews")} className="navbar-brand red" style={{ border: "0px" }}>
+                Science
+              </a>
+              <a onClick={()=>navigate("businessnews")} className="navbar-brand red" style={{ border: "0px" }}>
+                Business
+              </a>
+              <a onClick={()=>navigate("premium")} className="navbar-brand red" style={{ border: "0px" }}>
+                Premium
+              </a>
+            </span>
+          </nav>
+        </div>
+      </header>
+    </div>
+  );
+}
+
+export default Header;

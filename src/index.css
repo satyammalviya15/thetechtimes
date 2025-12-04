@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+header{
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2);
+}
+
+.navbar1{
+  /* border-bottom: 2px solid red; */
+  font-size:15px;
+  font-weight:500;
+  
+}
+
+.navbar2{
+  padding-bottom: 20px;
+  /* background-color: red; */
+}
+
+.title{
+ font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-size: clamp(15px, 5vw, 55px);
+  font-weight: 500;
+  font-style: medium;
+  text-decoration: none;  
+}
+
+.title>img{
+  width:clamp(40px, 5vw, 75px);;
+  height:clamp(40px, 5vw, 75px);;
+}
+
+a {
+  margin:5px clamp(0px,5px, 10px);
+  font-weight: 500;
+  color: #B00020;
+  cursor: pointer;
+
+}
+a.red {
+  color: black;
+
+}
+a:hover {
+  color: #B00020;
+  border-bottom: #B00020 1px solid;
+}
+
+.black a {
+  margin: 5px clamp(0px, 5px, 10px);
+  font-weight: 500;
+  color: black;
+  cursor: pointer;
+}
+
+.black a.red {
+  color: black;
+}
+
+.black a:hover {
+  color: black;
+  border-bottom:none;
+}
+
+
+button {
+  border-radius: 2px;
+  border: 2px solid #B00020;
+  color: white;
+  background-color: #B00020;
+  padding: 0.20em 0.5em;
+  font-size: .5em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+button:hover {
+  /* border-color: #00B1CD; */
+  color:#B00020;
+  background-color: white;
+}
+
+/* BOOK EFFECT FOR MODAL */
+.book-container {
+  perspective: 1500px;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.book {
+  display: flex;
+  width: 100%;
+  height: 85vh;
+  background: linear-gradient(90deg, #f8f9fa 50%, #fff 50%);
+  border-radius: 10px;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  animation: openBook 0.8s ease forwards;
+  overflow: hidden;
+}
+
+.page {
+  width: 50%;
+  height: 100%;
+  padding: 2rem;
+  overflow: auto;
+  backface-visibility: hidden;
+}
+
+.left-page {
+  background: #f8f9fa;
+  transform-origin: left center;
+  box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.right-page {
+  background: #fff;
+  transform-origin: right center;
+  box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.page-content {
+  padding: 1rem;
+}
+
+@keyframes openBook {
+  from {
+    transform: rotateY(-90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+.category-scroll-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth;
+}
+
+.category-scroll-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+} */
+
+/* :root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* 
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
