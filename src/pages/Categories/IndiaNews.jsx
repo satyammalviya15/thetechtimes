@@ -124,7 +124,7 @@ const IndiaNewsCard = ({ item }) => (
 // ---------------------------------------
 export default function IndiaNews() {
   return (
-    <div className="bg-light min-vh-100">
+    <div className="min-vh-100">
       <div className="container py-4">
         <h2 className="fw-bold mb-4 border-bottom pb-2">
           <Globe className="me-2 text-primary" />

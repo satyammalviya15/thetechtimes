@@ -123,7 +123,7 @@ const TechNewsCard = ({ item }) => (
 // ---------------------------------------
 export default function TechPage() {
   return (
-    <div className="bg-light min-vh-100">
+    <div className="min-vh-100">
       <div className="container py-4">
         <h2 className="fw-bold mb-4 border-bottom pb-2">
           <Cpu className="me-2 text-primary" /> Technology News

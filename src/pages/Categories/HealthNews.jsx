@@ -118,7 +118,7 @@ const HealthNewsCard = ({ item }) => (
 
 export default function HealthNews() {
   return (
-    <div className="bg-light min-vh-100">
+    <div className="min-vh-100">
       <div className="container py-4">
         <h2 className="fw-bold mb-4 border-bottom pb-2">
           <HeartPulse className="me-2 text-danger" />

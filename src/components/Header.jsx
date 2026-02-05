@@ -19,7 +19,7 @@ import linkdin from "../assets/linkedin.png";
 import telegram from "../assets/telegram.png";
 import whatsapp from "../assets/whatsapp.png";
 import fire from "../assets/fire.gif";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   let navigate = useNavigate();
@@ -334,13 +334,14 @@ function Header() {
                   <img src={ebook} alt="I" width={20} height={20} />
                   eBooks
                 </a>
-                <a
+                <Link
+                  to="/login"
                   className="navbar-brand"
                   style={{ color: "black", float: "right", fontSize: "12px" }}
                 >
                   LOGIN
                   <img src={user} alt="I" width={15} height={15} />
-                </a>
+                </Link>
               </span>
               <span>
                 <a

@@ -2,7 +2,7 @@ import { Star, Crown, CheckCircle2, Zap, ShieldCheck, Gift } from "lucide-react"
 
 export default function PremiumPage() {
   return (
-    <div className="bg-light min-vh-100">
+    <div className="min-vh-100">
       <div className="container py-5">
 
          {/* TITLE */}

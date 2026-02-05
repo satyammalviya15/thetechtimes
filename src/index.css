@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
 header{
   box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2);
+}
+
+footer {
+  background-color: #F2F2F2;
 }
 
 .navbar1{
@@ -19,18 +23,24 @@ header{
 .title{
  font-family: "Playfair Display", serif;
   font-optical-sizing: auto;
-  font-size: clamp(15px, 5vw, 55px);
+  font-size: clamp(15px, 5vw, 50px);
   font-weight: 500;
   font-style: medium;
   text-decoration: none;  
 }
 
 .title>img{
-  width:clamp(40px, 5vw, 75px);;
-  height:clamp(40px, 5vw, 75px);;
+  width:clamp(35px, 5vw, 70px);;
+  height:clamp(35px, 5vw, 70px);;
 }
 
 a {
+  font-family: "Merriweather", serif;
+  font-optical-sizing: auto;
+  font-weight:bolder;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
   margin:5px clamp(0px,5px, 10px);
   font-weight: 500;
   color: #B00020;

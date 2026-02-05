@@ -107,7 +107,7 @@ const BusinessLatestCard = ({ item }) => (
 // ---------------------------------------
 export default function BusinessNews() {
   return (
-    <div className="bg-light min-vh-100">
+    <div className="min-vh-100">
       <div className="container py-4">
         <h2 className="fw-bold mb-4 pb-2 border-bottom">
           <Banknote className="me-2 text-success" />

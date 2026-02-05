@@ -104,7 +104,7 @@ const ScienceLatestCard = ({ item }) => (
 // ---------------------------------------
 export default function ScienceNews() {
   return (
-    <div className="bg-light min-vh-100">
+    <div className="min-vh-100">
       <div className="container py-4">
         <h2 className="fw-bold mb-4 border-bottom pb-2">
           <Atom className="me-2 text-primary" />
