@@ -1,4 +1,6 @@
 import { Briefcase, TrendingUp, Clock, Award, Building2 } from "lucide-react";
+import { useContext } from "react";
+import { NewContext } from "../../context/MyContext";
 
 // ---------------------------------------
 // JOB NEWS DATA
@@ -8,7 +10,8 @@ const jobTopStories = [
   {
     id: 1,
     title: "TCS Announces 40,000 New Hiring Positions for 2025",
-    excerpt: "Largest hiring drive focusing on AI, Cloud, and Cybersecurity roles.",
+    excerpt:
+      "Largest hiring drive focusing on AI, Cloud, and Cybersecurity roles.",
     image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200",
     company: "TCS",
     category: "Hiring",
@@ -18,7 +21,8 @@ const jobTopStories = [
   {
     id: 2,
     title: "Google India Offers ₹18 LPA for Entry-Level Engineers",
-    excerpt: "Freshers get massive salary boost due to demand in AI-based development.",
+    excerpt:
+      "Freshers get massive salary boost due to demand in AI-based development.",
     image: "https://images.unsplash.com/photo-1551836022-4c4c79ecde51?w=1200",
     company: "Google",
     category: "Salary Update",
@@ -29,7 +33,8 @@ const jobTopStories = [
     id: 3,
     title: "Infosys to Hire 12,000 Graduates from Tier-2 Cities",
     excerpt: "Focus on remote development centers and hybrid tech parks.",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200",
+    image:
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200",
     company: "Infosys",
     category: "Recruitment",
     date: "8 hours ago",
@@ -65,7 +70,9 @@ const jobLatest = [
 // REUSABLE CARD COMPONENTS
 // ---------------------------------------
 const TopJobCard = ({ post, featured = false }) => (
-  <div className={`card h-100 border-0 shadow-sm hover-card ${featured ? "featured-post" : ""}`}>
+  <div
+    className={`card h-100 border-0 shadow-sm hover-card ${featured ? "featured-post" : ""}`}
+  >
     <img
       src={post.image}
       className="card-img-top"
@@ -74,21 +81,22 @@ const TopJobCard = ({ post, featured = false }) => (
     />
 
     <div className="card-body">
-      <span className="badge bg-danger mb-2">{post.category}</span>
-      {featured && (
-        <div className="badge bg-warning text-dark mb-2">
-          <Award size={16} className="me-1" /> Featured
-        </div>
-      )}
+      <span className="badge bg-danger mb-2">
+        {post.category?.name || "Job News"}
+      </span>
 
-      <h4 className={`fw-bold mb-2 ${featured ? "fs-3" : "fs-5"}`}>{post.title}</h4>
-      <p className="text-muted small">{post.excerpt}</p>
+      <h4 className={`fw-bold mb-2 ${featured ? "fs-3" : "fs-5"}`}>
+        {post.title}
+      </h4>
+
+      <p className="text-muted small">{post.summary}</p>
 
       <div className="d-flex justify-content-between mt-3 text-muted small">
         <span>
-          <Building2 size={14} className="me-1" /> {post.company}
+          <Building2 size={14} className="me-1" />
+          Admin
         </span>
-        <span>🕒 {post.date}</span>
+        <span>🕒 {new Date(post.createdAt).toLocaleDateString()}</span>
         <span>👁 {post.views}</span>
       </div>
     </div>
@@ -123,7 +131,8 @@ const JobNewsCard = ({ item }) => (
 // ---------------------------------------
 // MAIN JOB PAGE COMPONENT
 // ---------------------------------------
-export default function JobPage() {
+export default function TrendingNews() {
+  const { news } = useContext(NewContext);
   return (
     <div className="min-vh-100">
       <div className="container py-4">
@@ -137,7 +146,7 @@ export default function JobPage() {
           <div className="col-lg-8">
             {/* FEATURED JOB */}
             <div className="mb-4">
-              <TopJobCard post={jobTopStories[0]} featured />
+              {news?.length > 0 && <TopJobCard post={news[0]} featured />}
             </div>
 
             {/* OTHER TOP JOB CARDS */}
@@ -191,7 +200,7 @@ export default function JobPage() {
       </div>
 
       {/* EXTRA STYLES */}
-      <style jsx>{`
+      <style jsx="true">{`
         .hover-card {
           transition: 0.3s;
           cursor: pointer;

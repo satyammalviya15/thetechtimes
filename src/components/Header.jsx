@@ -20,9 +20,13 @@ import telegram from "../assets/telegram.png";
 import whatsapp from "../assets/whatsapp.png";
 import fire from "../assets/fire.gif";
 import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { NewContext } from "../context/MyContext";
+import { toast } from "react-toastify";
 
 function Header() {
   let navigate = useNavigate();
+  const { token, setToken } = useContext(NewContext);
 
   const closeOffcanvasAndNavigate = (path) => {
     const offcanvasElement = document.getElementById("offcanvasExample");
@@ -49,7 +53,7 @@ function Header() {
             {/* Offcanwas */}
             <div
               className="offcanvas offcanvas-start"
-              tabindex="-1"
+              tabIndex="-1"
               id="offcanvasExample"
               aria-labelledby="offcanvasExampleLabel"
             >
@@ -101,72 +105,56 @@ function Header() {
                         onClick={() => closeOffcanvasAndNavigate("technews")}
                         className="col-6 border-bottom py-1 "
                       >
-                        <a style={{border:"none"}}>
-                        Tech
-                        </a>
+                        <a style={{ border: "none" }}>Tech</a>
                       </div>
 
                       <div
                         onClick={() => closeOffcanvasAndNavigate("jobnews")}
                         className="col-6 border-bottom py-1"
                       >
-                         <a style={{border:"none"}}>
-                        Jobs
-                         </a>
+                        <a style={{ border: "none" }}>Jobs</a>
                       </div>
 
                       <div
                         onClick={() => closeOffcanvasAndNavigate("indianews")}
                         className="col-6 border-bottom py-1"
                       >
-                         <a style={{border:"none"}}>
-                        India
-                         </a>
+                        <a style={{ border: "none" }}>India</a>
                       </div>
 
                       <div
                         onClick={() => closeOffcanvasAndNavigate("worldnews")}
                         className="col-6 border-bottom py-1"
                       >
-                        <a style={{border:"none"}}>
-                        World
-                        </a>
+                        <a style={{ border: "none" }}>World</a>
                       </div>
 
                       <div
                         onClick={() => closeOffcanvasAndNavigate("sportsnews")}
                         className="col-6 border-bottom py-1"
                       >
-                        <a style={{border:"none"}}>
-                        Sport
-                        </a>
+                        <a style={{ border: "none" }}>Sport</a>
                       </div>
 
                       <div
                         onClick={() => closeOffcanvasAndNavigate("datanews")}
                         className="col-6 border-bottom py-1"
                       >
-                        <a style={{border:"none"}}>
-                        Data
-                        </a>
+                        <a style={{ border: "none" }}>Data</a>
                       </div>
 
                       <div
                         onClick={() => closeOffcanvasAndNavigate("healthnews")}
                         className="col-6 border-bottom py-1"
                       >
-                        <a style={{border:"none"}}>
-                        Health
-                        </a>
+                        <a style={{ border: "none" }}>Health</a>
                       </div>
 
                       <div
                         onClick={() => closeOffcanvasAndNavigate("sciencenews")}
                         className="col-6 border-bottom py-1"
                       >
-                        <a style={{border:"none"}}>
-                        Science
-                        </a>
+                        <a style={{ border: "none" }}>Science</a>
                       </div>
 
                       <div
@@ -175,18 +163,14 @@ function Header() {
                         }
                         className="col-6 border-bottom py-1"
                       >
-                        <a style={{border:"none"}}>
-                        Business
-                        </a>
+                        <a style={{ border: "none" }}>Business</a>
                       </div>
 
                       <div
                         onClick={() => closeOffcanvasAndNavigate("premium")}
                         className="col-6 border-bottom py-1"
                       >
-                        <a style={{border:"none"}}>
-                        Premium
-                        </a>
+                        <a style={{ border: "none" }}>Premium</a>
                       </div>
                     </div>
                   </div>
@@ -284,7 +268,7 @@ function Header() {
                 <div className="dropdown mt-3">
                   <div className="col-6 py-1 flex-column">
                     <div>Connect with us</div>
-                    <div class="d-flex flex-row bd-highlight mb-3 black">
+                    <div className="d-flex flex-row bd-highlight mb-3 black">
                       <a>
                         <img src={chat} width={20} height={20} alt="" />
                       </a>
@@ -317,7 +301,7 @@ function Header() {
                 e-Paper
               </a>
             </span>
-            <span className="title" onClick={() => navigate("/")}>
+            <span className="title pointer" onClick={() => navigate("/")}>
               THE TECH TIMES
               <img className="" src={natrajalogo} alt="I" />
             </span>
@@ -334,14 +318,31 @@ function Header() {
                   <img src={ebook} alt="I" width={20} height={20} />
                   eBooks
                 </a>
-                <Link
-                  to="/login"
-                  className="navbar-brand"
-                  style={{ color: "black", float: "right", fontSize: "12px" }}
-                >
-                  LOGIN
-                  <img src={user} alt="I" width={15} height={15} />
-                </Link>
+                {token ? (
+                  <Link
+                    to="/"
+                    className="navbar-brand"
+                    style={{ color: "black", float: "right", fontSize: "12px" }}
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      setToken("");
+                      // toast.success("User Logout")
+                      // window.location.reload();
+                    }}
+                  >
+                    LogOut
+                    <img src={user} alt="I" width={15} height={15} />
+                  </Link>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="navbar-brand"
+                    style={{ color: "black", float: "right", fontSize: "12px" }}
+                  >
+                    Login
+                    <img src={user} alt="I" width={15} height={15} />
+                  </Link>
+                )}
               </span>
               <span>
                 <a

@@ -4,11 +4,13 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import MyContextProvider from "./context/MyContext.jsx";
+import { ToastContainer } from "react-toastify";
 
 createRoot(document.getElementById("root")).render(
-  <MyContextProvider>
-    <BrowserRouter>
+  <BrowserRouter>
+    <MyContextProvider>
       <App />
-    </BrowserRouter>
-  </MyContextProvider>,
+      <ToastContainer/>
+    </MyContextProvider>
+  </BrowserRouter>,
 );

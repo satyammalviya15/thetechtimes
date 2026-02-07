@@ -304,7 +304,7 @@ const QuizOfTheDay = () => {
 function FrontPage() {
   return (
     <>
-      <div className="bg-light min-vh-100">
+      <div className="min-vh-100">
         <div className="container py-4">
           <div className="row">
             {/* Main Content - Left Column */}

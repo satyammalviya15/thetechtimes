@@ -383,7 +383,7 @@ const Footer = ({ darkMode = false }) => {
         <div className="small opacity-75">
           <div className="dropdown mt-3">
             <div className="col-12 py-1 flex-column">
-              <div class="d-flex flex-row bd-highlight mb-3 black">
+              <div className="d-flex flex-row bd-highlight mb-3 black">
                 <Link
                   to="/weareworkingonthat"
                   onClick={() =>
