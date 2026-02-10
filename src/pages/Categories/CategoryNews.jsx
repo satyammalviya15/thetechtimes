@@ -84,8 +84,8 @@ export default function CategoryNews() {
   const fetchNews = async () => {
     try {
       setLoading(true);
-      setNews([]);
-      setFeaturedPost(null);
+      // setFeaturedPost(null);
+      // setNews([]);
 
       const res = await axios.get(`${BACKEND_URL}/api/news`, {
         params: { category: normalizeCategory(category) },
@@ -93,12 +93,12 @@ export default function CategoryNews() {
 
       const data = res.data?.data || [];
 
-      setNews(data);
       if (data.length > 0) setFeaturedPost(data[0]);
+      setNews(data);
     } catch (err) {
       console.error(err);
-      setNews([]);
       setFeaturedPost(null);
+      setNews([]);
     } finally {
       setLoading(false);
     }
@@ -108,16 +108,6 @@ export default function CategoryNews() {
   useEffect(() => {
     fetchNews();
   }, [category]);
-
-  /* ---------------- LOADING ---------------- */
-  if (loading) {
-    return (
-      <div className="container py-5 text-center">
-        <div className="spinner-border text-danger" />
-        <p className="mt-2">Loading job posts...</p>
-      </div>
-    );
-  }
 
   /* ---------------- NO DATA ---------------- */
   if (!loading && news.length === 0) {
@@ -133,13 +123,10 @@ export default function CategoryNews() {
 
   /* ---------------- MAIN UI ---------------- */
   return (
-    <div className="min-vh-100">
+    <div className="min-vh-100 position-relative">
+      {/* ===== CONTENT ===== */}
+      <div className={loading ? "content-blur" : ""}>
       <div className="container py-4">
-        <h2 className="fw-bold mb-4 border-bottom pb-2">
-          <Briefcase className="me-2 text-danger" />
-          Job News & Hiring Updates
-        </h2>
-
         <div className="row">
           {/* LEFT */}
           <div className="col-lg-8">
@@ -171,9 +158,9 @@ export default function CategoryNews() {
           <div className="col-lg-4">
             <div className="card border-0 shadow-sm mb-4">
               <div className="card-header bg-danger text-white fw-semibold">
-                <TrendingUp size={16} className="me-2" />
-                Trending Job Alerts
-              </div>
+                  <TrendingUp size={16} className="me-2" />
+                  Trending Job Alerts
+                </div>
               <div className="list-group list-group-flush">
                 {news.map((t, i) => (
                   <div key={i} className="list-group-item hover-item">
@@ -185,6 +172,14 @@ export default function CategoryNews() {
           </div>
         </div>
       </div>
+      </div>
+
+      {/* ===== LOADING OVERLAY ===== */}
+      {loading && (
+        <div className="loading-overlay">
+          <div className="spinner-border text-dark" />
+        </div>
+      )}
 
       {/* STYLES */}
       <style jsx="true">{`
@@ -199,6 +194,27 @@ export default function CategoryNews() {
         .featured-post {
           border-left: 4px solid #b30000;
           cursor: default;
+        }
+          .content-blur {
+          filter: blur(3px);
+          pointer-events: none;
+          user-select: none;
+          transition: filter 0.2s ease;
+        }
+
+        .loading-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.25);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 999;
+        }
+
+        .spinner-border {
+          width: 3rem;
+          height: 3rem;
         }
       `}</style>
     </div>

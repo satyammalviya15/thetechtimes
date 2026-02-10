@@ -311,10 +311,6 @@ function FrontPage() {
             <div className="col-lg-8">
               {/* Top Posts Section */}
               <div className="mb-4">
-                <h2 className="fw-bold mb-4 border-bottom border-black pb-2">
-                  <TrendingUp className="me-2 text-primary" />
-                  Top Stories
-                </h2>
 
                 {/* Featured Post */}
                 <div className="mb-4">
