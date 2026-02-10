@@ -102,65 +102,72 @@ function Header() {
                       style={{ border: "0px", textDecoration: "none" }}
                     >
                       <div
-                        onClick={() => closeOffcanvasAndNavigate("technews")}
+                        // onClick={() => closeOffcanvasAndNavigate("technews")}
+                        onClick={() => closeOffcanvasAndNavigate("news/technology")}
                         className="col-6 border-bottom py-1 "
                       >
                         <a style={{ border: "none" }}>Tech</a>
                       </div>
 
                       <div
-                        onClick={() => closeOffcanvasAndNavigate("jobnews")}
+                        // onClick={() => closeOffcanvasAndNavigate("jobnews")}
+                        onClick={() => closeOffcanvasAndNavigate("news/jobs")}
                         className="col-6 border-bottom py-1"
                       >
                         <a style={{ border: "none" }}>Jobs</a>
                       </div>
 
                       <div
-                        onClick={() => closeOffcanvasAndNavigate("indianews")}
+                        // onClick={() => closeOffcanvasAndNavigate("indianews")}
+                        onClick={() => closeOffcanvasAndNavigate("news/india")}
                         className="col-6 border-bottom py-1"
                       >
                         <a style={{ border: "none" }}>India</a>
                       </div>
 
                       <div
-                        onClick={() => closeOffcanvasAndNavigate("worldnews")}
+                        // onClick={() => closeOffcanvasAndNavigate("worldnews")}
+                        onClick={() => closeOffcanvasAndNavigate("news/world")}
                         className="col-6 border-bottom py-1"
                       >
                         <a style={{ border: "none" }}>World</a>
                       </div>
 
                       <div
-                        onClick={() => closeOffcanvasAndNavigate("sportsnews")}
+                        // onClick={() => closeOffcanvasAndNavigate("sportsnews")}
+                        onClick={() => closeOffcanvasAndNavigate("news/sports")}
                         className="col-6 border-bottom py-1"
                       >
                         <a style={{ border: "none" }}>Sport</a>
                       </div>
 
                       <div
-                        onClick={() => closeOffcanvasAndNavigate("datanews")}
+                        // onClick={() => closeOffcanvasAndNavigate("datanews")}
+                        onClick={() => closeOffcanvasAndNavigate("news/data")}
                         className="col-6 border-bottom py-1"
                       >
                         <a style={{ border: "none" }}>Data</a>
                       </div>
 
                       <div
-                        onClick={() => closeOffcanvasAndNavigate("healthnews")}
+                        // onClick={() => closeOffcanvasAndNavigate("healthnews")}
+                        onClick={() => closeOffcanvasAndNavigate("news/health")}
                         className="col-6 border-bottom py-1"
                       >
                         <a style={{ border: "none" }}>Health</a>
                       </div>
 
                       <div
-                        onClick={() => closeOffcanvasAndNavigate("sciencenews")}
+                        // onClick={() => closeOffcanvasAndNavigate("sciencenews")}
+                        onClick={() => closeOffcanvasAndNavigate("news/science")}
                         className="col-6 border-bottom py-1"
                       >
                         <a style={{ border: "none" }}>Science</a>
                       </div>
 
                       <div
-                        onClick={() =>
-                          closeOffcanvasAndNavigate("businessnews")
-                        }
+                        // onClick={() =>closeOffcanvasAndNavigate("businessnews")}
+                        onClick={() => closeOffcanvasAndNavigate("news/business")}
                         className="col-6 border-bottom py-1"
                       >
                         <a style={{ border: "none" }}>Business</a>
@@ -402,70 +409,80 @@ function Header() {
                 Search
               </a>
               <a
-                onClick={() => navigate("technews")}
+                // onClick={() => navigate("technews")}
+                onClick={() => navigate("/news/technology")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
                 Tech
               </a>
               <a
-                onClick={() => navigate("jobnews")}
+                // onClick={() => navigate("jobnews")}
+                 onClick={() => navigate("/news/jobs")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
                 Jobs
               </a>
               <a
-                onClick={() => navigate("indianews")}
+                // onClick={() => navigate("indianews")}
+                 onClick={() => navigate("/news/india")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
                 India
               </a>
               <a
-                onClick={() => navigate("worldnews")}
+                // onClick={() => navigate("worldnews")}
+                 onClick={() => navigate("/news/world")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
                 World
               </a>
               <a
-                onClick={() => navigate("sportsnews")}
+                // onClick={() => navigate("sportsnews")}
+                 onClick={() => navigate("/news/sports")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
                 Sport
               </a>
               <a
-                onClick={() => navigate("datanews")}
+                // onClick={() => navigate("datanews")}
+                 onClick={() => navigate("/news/data")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
                 Data
               </a>
               <a
-                onClick={() => navigate("healthnews")}
+                // onClick={() => navigate("healthnews")}
+                 onClick={() => navigate("/news/health")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
                 Health
               </a>
               <a
-                onClick={() => navigate("opinionnews")}
+                // onClick={() => navigate("opinionnews")}
+                onClick={() => navigate("/news/opinion")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
                 Opinion
               </a>
               <a
-                onClick={() => navigate("sciencenews")}
+                // onClick={() => navigate("sciencenews")}
+                onClick={() => navigate("/news/science")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
                 Science
               </a>
               <a
-                onClick={() => navigate("businessnews")}
+                // onClick={() => navigate("businessnews")}
+                onClick={() => navigate("/news/business")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >

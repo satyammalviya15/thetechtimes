@@ -19,16 +19,16 @@ import TermsOfUse from "./pages/Utilty/TermsOfUse";
 import PrivacyPolicy from "./pages/Utilty/PrivacyPolicy";
 import UnderConstruction from "./pages/Utilty/UnderConstruction";
 import TechTimesAuth from "./pages/TechTimesAuth";
-import TrendingNews from "./pages/Categories/TrendingNews";
-import ForgetPassword from "./pages/Utilty/ForgetPassword";
 import TheVideos from "./pages/TheVideos";
+import AuthSuccess from "./auth/AuthSucess";
+import CategoryNews from "./pages/Categories/CategoryNews";
 
 function App() {
   const location = useLocation();
 
   // Hide header/footer for login page
   const hideHeaderFooter =
-    location.pathname === "/login" || location.pathname === "/forgetpass";
+    location.pathname === "/login" || location.pathname === "/privacypolicy" || location.pathname === "/termsofuse";
 
   return (
     <>
@@ -41,7 +41,6 @@ function App() {
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/thebook" element={<TheBook />} />
         <Route path="/thevideos" element={<TheVideos />} />
-        <Route path="/news" element={<TrendingNews />} />
         <Route path="/technews" element={<TechNews />} />
         <Route path="/jobnews" element={<JobNews />} />
         <Route path="/indianews" element={<IndiaNews />} />
@@ -53,7 +52,10 @@ function App() {
         <Route path="/sciencenews" element={<ScienceNews />} />
         <Route path="/businessnews" element={<BusinessNews />} />
         <Route path="/premium" element={<PremiumPage />} />
-        <Route path="/forgetpass" element={<ForgetPassword />} />
+        <Route path="/auth/success" element={<AuthSuccess/>}/>
+         <Route path="/news/:category" element={<CategoryNews />} />
+         <Route path="/business/:category" element={<CategoryNews />} />
+         <Route path="/careers/:category" element={<CategoryNews />} />
       </Routes>
       {!hideHeaderFooter && <Footer />}
     </>

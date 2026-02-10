@@ -201,12 +201,7 @@ const Footer = ({ darkMode = false }) => {
                 </li>
                 {newcategories["news"].map((cat, index) => (
                   <li key={`${cat}-${index}`} className="col-6 col-md-12 mb-2">
-                    <a
-                      href="#"
-                      className="text-decoration-none opacity-75 small hover-link text-dark"
-                    >
-                      {cat}
-                    </a>
+                    <Link to={"/news/"+cat.toLowerCase().replace(/\s+/g, "")} className="text-decoration-none small text-dark opacity-75 hover-link" onClick={window.scrollTo({ top: 0, behavior: "smooth" })}>{cat}</Link>
                   </li>
                 ))}
               </ul>
@@ -243,12 +238,9 @@ const Footer = ({ darkMode = false }) => {
                 </li>
                 {newcategories["business"].map((cat, index) => (
                   <li key={`${cat}-${index}`} className="col-6 col-md-12 mb-2">
-                    <a
-                      href="#"
-                      className="text-decoration-none opacity-75 small hover-link text-dark"
-                    >
-                      {cat}
-                    </a>
+                   <Link to={"/business/"+cat.toLowerCase().replace(/\s+/g, "")} className="text-decoration-none small text-dark opacity-75 hover-link" onClick={window.scrollTo({ top: 0, behavior: "smooth" })}>
+                   {cat}
+                   </Link>
                   </li>
                 ))}
               </ul>
@@ -330,9 +322,9 @@ const Footer = ({ darkMode = false }) => {
                         key={`${cat}-${index}`}
                         className="col-6 col-md-12 mb-2"
                       >
-                        <a className="text-decoration-none small text-dark opacity-75 hover-link">
+                        <Link to={"/careers/"+cat.toLowerCase().replace(/\s+/g, "")} className="text-decoration-none small text-dark opacity-75 hover-link" onClick={window.scrollTo({ top: 0, behavior: "smooth" })}>
                           {cat}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>

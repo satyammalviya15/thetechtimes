@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { NewContext } from "../context/MyContext";
 import { Link } from "react-router-dom";
+import { GoogleLoginButton } from "../components/GoogleLoginButton";
 
 const TechTimesAuth = () => {
   const { userLogin ,userRegister} = useContext(NewContext);
@@ -207,13 +208,13 @@ const TechTimesAuth = () => {
                           Remember me
                         </label>
                       </div>
-                      <Link
+                      {/* <Link
                         to="/forgetpass"
                         className="small"
                         style={{ color: "#B00020", textDecoration: "none" }}
                       >
                         Forgot Password?
-                      </Link>
+                      </Link> */}
                     </div>
 
                     {/* Submit */}
@@ -248,6 +249,9 @@ const TechTimesAuth = () => {
                           Create Account
                         </a>
                       </p>
+                    </div>
+                    <div className="text-center mt-3">
+                      <GoogleLoginButton/>
                     </div>
                   </div>
                 ) : (
