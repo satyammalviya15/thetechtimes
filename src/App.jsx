@@ -22,6 +22,7 @@ import TechTimesAuth from "./pages/TechTimesAuth";
 import TheVideos from "./pages/TheVideos";
 import AuthSuccess from "./auth/AuthSucess";
 import CategoryNews from "./pages/Categories/CategoryNews";
+import SearchModal from "./components/SearchModal";
 
 function App() {
   const location = useLocation();
@@ -33,6 +34,7 @@ function App() {
   return (
     <>
       {!hideHeaderFooter && <Header />}
+      <SearchModal />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/weareworkingonthat" element={<UnderConstruction />} />

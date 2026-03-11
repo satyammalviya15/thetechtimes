@@ -3,7 +3,8 @@ import thestory from "../assets/TheStory.jpg";
 import thetech from "../assets/TheTech.jpg";
 import thejob from "../assets/TheJobs.jpg";
 
-import { useState} from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import {
   TrendingUp,
   TrendingDown,
@@ -11,84 +12,7 @@ import {
   Clock,
 } from "lucide-react";
 
-// Sample Data
-const topPosts = [
-  {
-    id: 1,
-    title: "OpenAI Unveils GPT-5: Revolutionary AI Breakthrough",
-    excerpt:
-      "The latest iteration promises unprecedented natural language understanding and reasoning capabilities.",
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200",
-    category: "Breaking News",
-    author: "Sarah Chen",
-    date: "2 hours ago",
-    views: "25.4K",
-  },
-  {
-    id: 2,
-    title: "Tesla Announces Self-Driving Car Fleet Launch",
-    excerpt:
-      "Elon Musk reveals ambitious plans for autonomous vehicle network across major cities.",
-    image:
-      "https://images.unsplash.com/photo-1617704548623-340376564e68?w=1200",
-    category: "Technology",
-    author: "Mike Johnson",
-    date: "4 hours ago",
-    views: "18.2K",
-  },
-  {
-    id: 3,
-    title: "Quantum Computing: IBM's 1000 Qubit Milestone",
-    excerpt:
-      "Revolutionary achievement brings practical quantum computing closer to reality.",
-    image:
-      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200",
-    category: "Science",
-    author: "Dr. Lisa Kumar",
-    date: "6 hours ago",
-    views: "12.8K",
-  },
-];
-
-const newsArticles = [
-  {
-    id: 4,
-    title: "Apple Vision Pro 2 Leaked: Major Upgrades Expected",
-    category: "Gadgets",
-    date: "8 hours ago",
-    image: "https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?w=400",
-  },
-  {
-    id: 5,
-    title: "Microsoft Launches New AI-Powered Office Suite",
-    category: "Software",
-    date: "10 hours ago",
-    image: "https://images.unsplash.com/photo-1633419461186-7d40a38105ec?w=400",
-  },
-  {
-    id: 6,
-    title: "SpaceX Successfully Completes Mars Simulation Test",
-    category: "Space",
-    date: "12 hours ago",
-    image: "https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=400",
-  },
-  {
-    id: 7,
-    title: "New Cybersecurity Threat Targets Major Banks",
-    category: "Cybersecurity",
-    date: "1 day ago",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400",
-  },
-  {
-    id: 8,
-    title: "Google's Quantum AI Makes Breakthrough Discovery",
-    category: "AI",
-    date: "1 day ago",
-    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400",
-  },
-];
-
+// External Data Dependencies (crypto, stocks, metals, etc.) remain as static variables for now
 const cryptoData = [
   { name: "Bitcoin", symbol: "BTC", price: 67234.56, change: 2.45, isUp: true },
   { name: "Ethereum", symbol: "ETH", price: 3456.78, change: 1.23, isUp: true },
@@ -302,6 +226,76 @@ const QuizOfTheDay = () => {
   );
 };
 function FrontPage() {
+  const [topPostItems, setTopPostItems] = useState([]);
+  const [newsArticleItems, setNewsArticleItems] = useState([]);
+  const [trendingItems, setTrendingItems] = useState([]);
+  const [headlineItems, setHeadlineItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const res = await axios.get(`${BACKEND_URL}/api/news`);
+        const data = res.data?.data || [];
+        
+        if (data.length > 0) {
+          const formattedPosts = data.map((post) => ({
+            id: post._id || post.id,
+            title: post.title,
+            excerpt: post.excerpt || (post.content ? post.content.replace(/<[^>]+>/g, '').substring(0, 100) + '...' : ''),
+            image: post.image,
+            category: post.category?.name || post.category || "News",
+            author: "Admin",
+            date: post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "Recently",
+            views: post.views || 0,
+          }));
+          
+          if (formattedPosts.length > 0) {
+              // Shuffle on every load so visitors see different articles each visit
+              const shuffled = [...formattedPosts];
+              for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+              }
+
+              setTopPostItems(shuffled.slice(0, 3));
+              setNewsArticleItems(shuffled.slice(3, 8));
+              
+              const trendingData = shuffled.length > 8 ? shuffled.slice(8, 11) : shuffled.slice(0, 3);
+              setTrendingItems(trendingData.map(p => ({
+                  img: p.image || "technology,news",
+                  title: p.title,
+                  desc: p.excerpt || ""
+              })));
+              
+              const headlineData = shuffled.length > 11 ? shuffled.slice(11, 14) : shuffled.slice(0, 3);
+              setHeadlineItems(headlineData.map(p => [
+                  p.title,
+                  p.excerpt || ""
+              ]));
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchNews();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center min-vh-100">
+        <div className="spinner-border text-dark" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="min-vh-100">
@@ -314,12 +308,14 @@ function FrontPage() {
 
                 {/* Featured Post */}
                 <div className="mb-4">
-                  <TopPostCard post={topPosts[0]} featured={true} />
+                  {topPostItems.length > 0 && (
+                    <TopPostCard post={topPostItems[0]} featured={true} />
+                  )}
                 </div>
 
                 {/* Other Top Posts */}
                 <div className="row">
-                  {topPosts.slice(1).map((post) => (
+                  {topPostItems.slice(1).map((post) => (
                     <div key={post.id} className="col-md-6 mb-4">
                       <TopPostCard post={post} />
                     </div>
@@ -332,7 +328,7 @@ function FrontPage() {
                 <h3 className="fw-bold mb-3 border-bottom border-black pb-2">
                   Latest News
                 </h3>
-                {newsArticles.map((article) => (
+                {newsArticleItems.map((article) => (
                   <NewsCard key={article.id} article={article} />
                 ))}
               </div>
@@ -464,55 +460,20 @@ function FrontPage() {
           </div>
         </section>
 
-        <section className="container py-5">
-          <div className="row align-items-center">
-            <div className="col-md-7">
-              <h2 style={{ fontWeight: "600" }}>
-                AI Revolution Begins: India Leads a Global Tech Shift
-              </h2>
-              <p className="text-secondary mt-2">
-                India is emerging as a global AI powerhouse, driving
-                transformation in healthcare, education, agriculture, and
-                defense through scalable innovation and research.
-              </p>
-            </div>
-            <div className="col-md-5">
-              <img
-                src="https://source.unsplash.com/600x360/?artificial,intelligence"
-                className="img-fluid rounded shadow-sm"
-                alt=""
-              />
-            </div>
-          </div>
-        </section>
+
 
         {/* Trending Section */}
         <section className="py-4 bg-light">
           <div className="container">
             <h4 className="fw-bold mb-4">Trending Today</h4>
             <div className="row g-4">
-              {[
-                {
-                  img: "technology,news",
-                  title: "AI is Changing the World",
-                  desc: "Artificial Intelligence continues reshaping industries with automation and decision-making.",
-                },
-                {
-                  img: "cyber,security",
-                  title: "Cyber Security Alerts Rise",
-                  desc: "Experts warn users to strengthen personal data protection amid growing cyber threats.",
-                },
-                {
-                  img: "smartphones,gadgets",
-                  title: "New Gadgets Reviewed",
-                  desc: "We test the newest smartphones and wearables to guide your tech buying decisions.",
-                },
-              ].map((item, index) => (
+              {trendingItems.map((item, index) => (
                 <div className="col-md-4" key={index}>
                   <div className="card border-0 shadow-sm h-100">
                     <img
-                      src={`https://source.unsplash.com/500x300/?${item.img}`}
+                      src={item.img.includes('http') ? item.img : `https://source.unsplash.com/500x300/?${item.img}`}
                       className="card-img-top"
+                      style={{ height: '200px', objectFit: 'cover' }}
                       alt=""
                     />
                     <div className="card-body">
@@ -535,20 +496,7 @@ function FrontPage() {
             <h4 className="fw-bold mb-3">Latest Headlines</h4>
 
             <div className="list-group">
-              {[
-                [
-                  "SpaceX Launches New Satellite",
-                  "Boosts global communication and remote connectivity.",
-                ],
-                [
-                  "Meta Introduces Advanced VR",
-                  "Sets a new standard for virtual meeting environments.",
-                ],
-                [
-                  "Blockchain Industry Surges",
-                  "Businesses adopt decentralized systems globally.",
-                ],
-              ].map((item, i) => (
+              {headlineItems.map((item, i) => (
                 <a
                   key={i}
                   href="#"

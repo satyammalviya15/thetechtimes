@@ -23,6 +23,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { NewContext } from "../context/MyContext";
 import { toast } from "react-toastify";
+import SearchModal from "./SearchModal";
 
 function Header() {
   let navigate = useNavigate();
@@ -73,7 +74,7 @@ function Header() {
                 </span>
                 <button
                   type="button"
-                  className="btn-close"
+                  className="btn-close search-input"
                   data-bs-dismiss="offcanvas"
                   aria-label="Close"
                 ></button>
@@ -84,6 +85,9 @@ function Header() {
                     <div
                       className="input-group shadow-sm"
                       style={{ overflow: "hidden" }}
+                      data-bs-toggle="modal"
+                      data-bs-target="#searchModal"
+                      onClick={() => closeOffcanvasAndNavigate("")}
                     >
                       <input
                         type="text"
@@ -103,7 +107,9 @@ function Header() {
                     >
                       <div
                         // onClick={() => closeOffcanvasAndNavigate("technews")}
-                        onClick={() => closeOffcanvasAndNavigate("news/technology")}
+                        onClick={() =>
+                          closeOffcanvasAndNavigate("news/technology")
+                        }
                         className="col-6 border-bottom py-1 "
                       >
                         <a style={{ border: "none" }}>Tech</a>
@@ -159,7 +165,9 @@ function Header() {
 
                       <div
                         // onClick={() => closeOffcanvasAndNavigate("sciencenews")}
-                        onClick={() => closeOffcanvasAndNavigate("news/science")}
+                        onClick={() =>
+                          closeOffcanvasAndNavigate("news/science")
+                        }
                         className="col-6 border-bottom py-1"
                       >
                         <a style={{ border: "none" }}>Science</a>
@@ -167,7 +175,9 @@ function Header() {
 
                       <div
                         // onClick={() =>closeOffcanvasAndNavigate("businessnews")}
-                        onClick={() => closeOffcanvasAndNavigate("news/business")}
+                        onClick={() =>
+                          closeOffcanvasAndNavigate("news/business")
+                        }
                         className="col-6 border-bottom py-1"
                       >
                         <a style={{ border: "none" }}>Business</a>
@@ -404,6 +414,8 @@ function Header() {
                   fontSize: "15px",
                   marginRight: "100px",
                 }}
+                 data-bs-toggle="modal"
+                      data-bs-target="#searchModal"
               >
                 <img src={search} alt="S" width={20} height={20} />
                 Search
@@ -418,7 +430,7 @@ function Header() {
               </a>
               <a
                 // onClick={() => navigate("jobnews")}
-                 onClick={() => navigate("/news/jobs")}
+                onClick={() => navigate("/news/jobs")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
@@ -426,7 +438,7 @@ function Header() {
               </a>
               <a
                 // onClick={() => navigate("indianews")}
-                 onClick={() => navigate("/news/india")}
+                onClick={() => navigate("/news/india")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
@@ -434,7 +446,7 @@ function Header() {
               </a>
               <a
                 // onClick={() => navigate("worldnews")}
-                 onClick={() => navigate("/news/world")}
+                onClick={() => navigate("/news/world")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
@@ -442,7 +454,7 @@ function Header() {
               </a>
               <a
                 // onClick={() => navigate("sportsnews")}
-                 onClick={() => navigate("/news/sports")}
+                onClick={() => navigate("/news/sports")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
@@ -450,7 +462,7 @@ function Header() {
               </a>
               <a
                 // onClick={() => navigate("datanews")}
-                 onClick={() => navigate("/news/data")}
+                onClick={() => navigate("/news/data")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
@@ -458,7 +470,7 @@ function Header() {
               </a>
               <a
                 // onClick={() => navigate("healthnews")}
-                 onClick={() => navigate("/news/health")}
+                onClick={() => navigate("/news/health")}
                 className="navbar-brand red"
                 style={{ border: "0px" }}
               >
@@ -499,6 +511,7 @@ function Header() {
           </nav>
         </div>
       </header>
+      <SearchModal />
     </div>
   );
 }

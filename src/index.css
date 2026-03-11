@@ -159,6 +159,13 @@ button:hover {
 .pointer {
   cursor: pointer;
 }
+
+/* Remove bootstrap blue focus border */
+.search-input:focus {
+  border-color: #ced4da !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
 /* button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
