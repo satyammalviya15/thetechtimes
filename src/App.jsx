@@ -184,6 +184,7 @@ function App() {
         <Route path="/thejobs" element={<TheJobs />} />
         <Route path="/epaper" element={<EPaper />} />
         <Route path="/disclaimer" element={<Disclaimer />} />
+        <Route path="/login" element={<TechTimesAuth />} />
 
 
 
