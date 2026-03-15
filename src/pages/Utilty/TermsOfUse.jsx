@@ -5,7 +5,7 @@ const TermsOfUse = () => {
     <div className="container">
       <div className="">
         <div className="card-body">
-          <h1 className="mb-2">Terms of Use</h1>
+          <h1 className="mb-2">Terms & Conditions</h1>
           <p className="text-muted">Last Updated: January 2026</p>
 
           <p>

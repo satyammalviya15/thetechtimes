@@ -12,6 +12,8 @@ import {
   Award,
   Clock,
 } from "lucide-react";
+import natrajAdBg from "../assets/natraj_ad_bg.png";
+
 
 // External Data Dependencies (crypto, stocks, metals, etc.) remain as static variables for now
 const cryptoData = [
@@ -373,10 +375,18 @@ function FrontPage() {
               <QuizOfTheDay />
 
               {/* Ad Space */}
-              <div className="card border-0 shadow-sm bg-secondary text-white text-center p-5">
-                <h5>Advertisement</h5>
-                <p className="small mb-0">Your Ad Here</p>
-              </div>
+              <a href="https://natrajtech.com" target="_blank" rel="noopener noreferrer" className="text-decoration-none">
+                <div className="card border-0 shadow-lg text-white text-center p-5 hover-card position-relative overflow-hidden ad-card-premium">
+                  <div className="ad-bg-overlay"></div>
+                  <div className="position-relative z-1">
+                    <h5 className="fw-black mb-2 tracked-header">NATRAJ TECH</h5>
+                    <p className="small mb-0 opacity-90 fw-semibold">Leading the Future of Digital Innovation</p>
+                    <div className="mt-4">
+                      <span className="btn btn-sm btn-light text-primary rounded-pill px-4 fw-bold shadow-sm">Explore Solutions &rarr;</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -397,6 +407,31 @@ function FrontPage() {
           .featured-post {
             border-left: 4px solid black !important;
           }
+          .ad-card-premium {
+            background-image: url(${natrajAdBg});
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .ad-bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(13, 110, 253, 0.4) 100%);
+            z-index: 0;
+          }
+          .tracked-header {
+            letter-spacing: 2px;
+          }
+          .fw-black {
+            font-weight: 900;
+          }
         `}</style>
       </div>
       <div style={{ fontFamily: "Georgia, serif" }}>
@@ -407,68 +442,84 @@ function FrontPage() {
             style={{ whiteSpace: "nowrap" }}
           >
             <div className="col" style={{ minWidth: "250px" }}>
-              <div className="card h-100">
-                <img
-                  src={thebook}
-                  className="card-img-top custom-img"
-                  alt="..."
-                  height={400}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">The Book</h5>
-                  <p className="card-text">
-                    Different Types of Books for Knowledge.
-                  </p>
+              <Link to="/thebook" className="text-decoration-none text-dark h-100 d-block">
+                <div className="card h-100 hover-card shadow-sm border-0">
+                  <img
+                    src={thebook}
+                    className="card-img-top custom-img"
+                    alt="The Book"
+                    height={400}
+                    style={{ objectFit: 'cover' }}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title fw-bold">The Book</h5>
+                    <p className="card-text small text-muted">
+                      Different Types of Books for Knowledge.
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
 
-            <div className="col" style={{ minWidth: "250px" }}>
-              <div className="card h-100">
-                <img
-                  src={thestory}
-                  className="card-img-top custom-img"
-                  alt="..."
-                  height={400}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">The Story</h5>
-                  <p className="card-text">
-                    Latest stories from around the world.
-                  </p>
-                </div>
-              </div>
-            </div>
 
             <div className="col" style={{ minWidth: "250px" }}>
-              <div className="card h-100">
-                <img
-                  src={thetech}
-                  className="card-img-top custom-img"
-                  alt="..."
-                  height={400}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">The Tech</h5>
-                  <p className="card-text">Tech news & latest updates.</p>
+              <Link to="/thestory" className="text-decoration-none text-dark h-100 d-block">
+                <div className="card h-100 hover-card shadow-sm border-0">
+                  <img
+                    src={thestory}
+                    className="card-img-top custom-img"
+                    alt="The Story"
+                    height={400}
+                    style={{ objectFit: 'cover' }}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title fw-bold">The Story</h5>
+                    <p className="card-text small text-muted">
+                      Latest stories from around the world.
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
 
+
             <div className="col" style={{ minWidth: "250px" }}>
-              <div className="card h-100">
-                <img
-                  src={thejob}
-                  className="card-img-top custom-img"
-                  alt="..."
-                  height={400}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">The Job</h5>
-                  <p className="card-text">Platform to get job information.</p>
+              <Link to="/thetech" className="text-decoration-none text-dark h-100 d-block">
+                <div className="card h-100 hover-card shadow-sm border-0">
+                  <img
+                    src={thetech}
+                    className="card-img-top custom-img"
+                    alt="The Tech"
+                    height={400}
+                    style={{ objectFit: 'cover' }}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title fw-bold">The Tech</h5>
+                    <p className="card-text small text-muted">Tech news & latest updates.</p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
+
+
+            <div className="col" style={{ minWidth: "250px" }}>
+              <Link to="/thejobs" className="text-decoration-none text-dark h-100 d-block">
+                <div className="card h-100 hover-card shadow-sm border-0">
+                  <img
+                    src={thejob}
+                    className="card-img-top custom-img"
+                    alt="The Job"
+                    height={400}
+                    style={{ objectFit: 'cover' }}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title fw-bold">The Job</h5>
+                    <p className="card-text small text-muted">Platform to get job information.</p>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
           </div>
         </section>
 

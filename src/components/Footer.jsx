@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { NewContext } from "../context/MyContext";
 import natrajalogo from "../assets/natarajalogo.png";
 import chat from "../assets/chat.png";
 import email from "../assets/email.png";
@@ -12,12 +13,12 @@ import increase from "../assets/increase.png";
 const Footer = ({ darkMode = false }) => {
   let navigate = useNavigate();
 
-  const trending = [
-    "AI Revolution: How Generative AI Is Transforming the Tech Industry",
-    "Massive Cyber Attack Exposes Millions of User Records Worldwide",
-    "Indian Startup Becomes Unicorn After $150 Million Funding Round",
-    "Next-Generation Gadgets Set to Redefine Smart Living",
-  ];
+  const { news } = useContext(NewContext);
+
+  // Filter or sort news to get trending items (e.g., top 4 by views)
+  const trendingItems = news
+    ?.sort((a, b) => (b.views || 0) - (a.views || 0))
+    .slice(0, 4) || [];
 
   const newcategories = {
     news: [
@@ -95,6 +96,7 @@ const Footer = ({ darkMode = false }) => {
       "Community Stories",
     ],
 
+
     about: [
       "About Us",
       "Contact Us",
@@ -139,12 +141,13 @@ const Footer = ({ darkMode = false }) => {
                 </li>
                 {newcategories["about"].map((cat, index) => (
                   <li key={`${cat}-${index}`} className="col-6 col-md-12 mb-2">
-                    <a
-                      href="#"
+                    <Link
+                      to={`/${cat.toLowerCase().replace(/\s+/g, "")}`}
                       className="text-decoration-none opacity-75 small hover-link text-dark"
+                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
                       {cat}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -159,12 +162,13 @@ const Footer = ({ darkMode = false }) => {
                 </li>
                 {newcategories["help"].map((cat, index) => (
                   <li key={`${cat}-${index}`} className="col-6 col-md-12 mb-2">
-                    <a
-                      href="#"
+                    <Link
+                      to={`/${cat.toLowerCase().replace(/\s+/g, "")}`}
                       className="text-decoration-none opacity-75 small hover-link text-dark"
+                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
                       {cat}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -179,12 +183,13 @@ const Footer = ({ darkMode = false }) => {
                 </li>
                 {newcategories["legal"].map((cat, index) => (
                   <li key={`${cat}-${index}`} className="col-6 col-md-12 mb-2">
-                    <a
-                      href="#"
+                    <Link
+                      to={`/${cat.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "")}`}
                       className="text-decoration-none opacity-75 small hover-link text-dark"
+                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
                       {cat}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -216,12 +221,13 @@ const Footer = ({ darkMode = false }) => {
                 </li>
                 {newcategories["technology"].map((cat, index) => (
                   <li key={`${cat}-${index}`} className="col-6 col-md-12 mb-2">
-                    <a
-                      href="#"
+                    <Link
+                      to={`/${cat.toLowerCase().replace(/ & /g, "").replace(/\s+/g, "")}`}
                       className="text-decoration-none opacity-75 small hover-link text-dark"
+                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
                       {cat}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -255,12 +261,14 @@ const Footer = ({ darkMode = false }) => {
                 </li>
                 {newcategories["social"].map((cat, index) => (
                   <li key={`${cat}-${index}`} className="col-6 col-md-12 mb-2">
-                    <a
-                      href="#"
+                    <Link
+                      to={`/${cat.toLowerCase().replace(/[ /]/g, "").replace(/\s+/g, "")}`}
                       className="text-decoration-none opacity-75 small hover-link text-dark"
+                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
                       {cat}
-                    </a>
+                    </Link>
+
                   </li>
                 ))}
               </ul>
@@ -277,12 +285,13 @@ const Footer = ({ darkMode = false }) => {
                 </li>
                 {newcategories["learning"].map((cat, index) => (
                   <li key={`${cat}-${index}`} className="col-6 col-md-12 mb-2">
-                    <a
-                      href="#"
+                    <Link
+                      to={`/${cat.toLowerCase().replace(/\s+/g, "")}`}
                       className="text-decoration-none opacity-75 small hover-link text-dark"
+                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
                       {cat}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -297,12 +306,13 @@ const Footer = ({ darkMode = false }) => {
                 </li>
                 {newcategories["opinion"].map((cat, index) => (
                   <li key={`${cat}-${index}`} className="col-6 col-md-12 mb-2">
-                    <a
-                      href="#"
+                    <Link
+                      to={`/${cat.toLowerCase().replace(/\s+/g, "")}`}
                       className="text-decoration-none opacity-75 small hover-link text-dark"
+                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     >
                       {cat}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -341,9 +351,13 @@ const Footer = ({ darkMode = false }) => {
                         key={`${cat}-${index}`}
                         className="col-6 col-md-12 mb-2"
                       >
-                        <a className="text-decoration-none small text-dark opacity-75 hover-link">
+                        <Link
+                          to={`/${cat.toLowerCase().replace(/\s+/g, "")}`}
+                          className="text-decoration-none small text-dark opacity-75 hover-link"
+                          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                        >
                           {cat}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -355,14 +369,22 @@ const Footer = ({ darkMode = false }) => {
                 <div className="border-top border-5 border-dark">
                   <ul className="list-unstyled">
                     <li className="fw-bold m-1">Trending News</li>
-                    {trending.slice(0, 4).map((cat, index) => (
-                      <li key={`${cat}-${index}`} className="mb-2">
-                        <a className="text-decoration-none small text-dark opacity-75 hover-link">
-                          {cat}
-                        </a>
-                        <img src={increase} height={20} width={20} />
-                      </li>
-                    ))}
+                    {trendingItems.length > 0 ? (
+                      trendingItems.map((item, index) => (
+                        <li key={`${item._id}-${index}`} className="mb-2">
+                          <Link
+                            to={`/article/${item.slug}`}
+                            className="text-decoration-none small text-dark opacity-75 hover-link d-inline-block"
+                            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                          >
+                            {item.title}
+                            <img src={increase} height={16} width={16} className="ms-1" alt="Trending" />
+                          </Link>
+                        </li>
+                      ))
+                    ) : (
+                      <li className="small text-muted m-1">Loading trending news...</li>
+                    )}
                   </ul>
                 </div>
               </div>
@@ -377,56 +399,57 @@ const Footer = ({ darkMode = false }) => {
             <div className="col-12 py-1 flex-column">
               <div className="d-flex flex-row bd-highlight mb-3 black">
                 <Link
-                  to="/weareworkingonthat"
+                  to="/facebook"
                   onClick={() =>
                     window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
                   }
                 >
-                  <img src={chat} width={20} height={20} alt="" />
+                  <img src={chat} width={20} height={20} alt="Facebook" />
                 </Link>
                 <Link
                   onClick={() =>
                     window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
                   }
-                  to="/weareworkingonthat"
+                  to="/whatsappchannel"
                 >
-                  <img src={whatsapp} width={20} height={20} alt="" />
+                  <img src={whatsapp} width={20} height={20} alt="WhatsApp" />
                 </Link>
                 <Link
                   onClick={() =>
                     window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
                   }
-                  to="/weareworkingonthat"
+                  to="/newsletter"
                 >
-                  <img src={email} width={20} height={20} alt="" />
+                  <img src={email} width={20} height={20} alt="Newsletter" />
                 </Link>
                 <Link
                   onClick={() =>
                     window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
                   }
-                  to="/weareworkingonthat"
+                  to="/linkedin"
                 >
-                  <img src={linkdin} width={20} height={20} alt="" />
+                  <img src={linkdin} width={20} height={20} alt="LinkedIn" />
                 </Link>
                 <Link
                   onClick={() =>
                     window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
                   }
-                  to="/weareworkingonthat"
+                  to="/telegram"
                 >
-                  <img src={telegram} width={20} height={20} alt="" />
+                  <img src={telegram} width={20} height={20} alt="Telegram" />
                 </Link>
+
               </div>
               <div>
                 <Link
-                  to="/termsofuse"
+                  to="/terms-conditions"
                   className="text-decoration-none hover-link text-dark small"
                   style={{ border: "none" }}
                   onClick={() =>
                     window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
                   }
                 >
-                  TERMS OF USE
+                  TERMS & CONDITIONS
                 </Link>
                 {" /"}
                 <Link
@@ -438,6 +461,17 @@ const Footer = ({ darkMode = false }) => {
                   }
                 >
                   PRIVACY POLICY
+                </Link>
+                {" /"}
+                <Link
+                  to="/disclaimer"
+                  className="text-decoration-none hover-link text-dark small"
+                  style={{ border: "none" }}
+                  onClick={() =>
+                    window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+                  }
+                >
+                  DISCLAIMER
                 </Link>
                 {" /"}
               </div>
