@@ -45,7 +45,7 @@ function Header() {
 
   return (
     <div>
-      <header className="">
+      <header className="bg-white">
         <div className="container">
           <nav
             className="navbar navbar1 align-items-end align-items-xl-center align-items-lg-center"

@@ -4,6 +4,7 @@ import thetech from "../assets/TheTech.jpg";
 import thejob from "../assets/TheJobs.jpg";
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import {
   TrendingUp,
@@ -49,69 +50,73 @@ const quizOfTheDay = {
 
 // Top Post Card Component
 const TopPostCard = ({ post, featured = false }) => (
-  <div
-    className={`card h-100 border-0 shadow-sm overflow-hidden hover-card ${
-      featured ? "featured-post" : ""
-    }`}
-  >
-    <div className="position-relative">
-      <img
-        src={post.image}
-        className="card-img-top"
-        alt={post.title}
-        style={{ height: featured ? "400px" : "250px", objectFit: "cover" }}
-      />
-      <span className="badge bg-danger position-absolute top-0 start-0 m-3">
-        {post.category}
-      </span>
-      {featured && (
-        <div className="badge bg-warning text-dark position-absolute top-0 end-0 m-3">
-          <Award className="me-1" size={16} />
-          Featured
+  <Link to={`/article/${post.slug || post.id}`} className="text-decoration-none text-dark">
+    <div
+      className={`card h-100 border-0 shadow-sm overflow-hidden hover-card ${
+        featured ? "featured-post" : ""
+      }`}
+    >
+      <div className="position-relative">
+        <img
+          src={post.image}
+          className="card-img-top"
+          alt={post.title}
+          style={{ height: featured ? "400px" : "250px", objectFit: "cover" }}
+        />
+        <span className="badge bg-danger position-absolute top-0 start-0 m-3">
+          {post.category}
+        </span>
+        {featured && (
+          <div className="badge bg-warning text-dark position-absolute top-0 end-0 m-3">
+            <Award className="me-1" size={16} />
+            Featured
+          </div>
+        )}
+      </div>
+      <div className="card-body">
+        <h3 className={`card-title ${featured ? "fs-4" : "fs-5"} fw-bold mb-3`}>
+          {post.title}
+        </h3>
+        <p className="card-text text-muted">{post.excerpt}</p>
+        <div className="d-flex justify-content-between align-items-center mt-3">
+          <div className="text-muted small">
+            <span className="me-3">👤 {post.author}</span>
+            <span className="me-3">🕐 {post.date}</span>
+            <span>👁️ {post.views}</span>
+          </div>
+          <button className="btn btn-outline-black btn-sm">Read More</button>
         </div>
-      )}
-    </div>
-    <div className="card-body">
-      <h3 className={`card-title ${featured ? "fs-4" : "fs-5"} fw-bold mb-3`}>
-        {post.title}
-      </h3>
-      <p className="card-text text-muted">{post.excerpt}</p>
-      <div className="d-flex justify-content-between align-items-center mt-3">
-        <div className="text-muted small">
-          <span className="me-3">👤 {post.author}</span>
-          <span className="me-3">🕐 {post.date}</span>
-          <span>👁️ {post.views}</span>
-        </div>
-        <button className="btn btn-outline-black btn-sm">Read More</button>
       </div>
     </div>
-  </div>
+  </Link>
 );
 
 // News Card Component
 const NewsCard = ({ article }) => (
-  <div className="card border-0 shadow-sm mb-3 hover-card">
-    <div className="row g-0">
-      <div className="col-4">
-        <img
-          src={article.image}
-          className="img-fluid rounded-start h-100"
-          style={{ objectFit: "cover" }}
-          alt={article.title}
-        />
-      </div>
-      <div className="col-8">
-        <div className="card-body">
-          <span className="badge bg-black mb-2">{article.category}</span>
-          <h5 className="card-title fw-semibold">{article.title}</h5>
-          <p className="text-muted small mb-0">
-            <Clock size={14} className="me-1" />
-            {article.date}
-          </p>
+  <Link to={`/article/${article.slug || article.id}`} className="text-decoration-none text-dark">
+    <div className="card border-0 shadow-sm mb-3 hover-card">
+      <div className="row g-0">
+        <div className="col-4">
+          <img
+            src={article.image}
+            className="img-fluid rounded-start h-100"
+            style={{ objectFit: "cover" }}
+            alt={article.title}
+          />
+        </div>
+        <div className="col-8">
+          <div className="card-body">
+            <span className="badge bg-black mb-2">{article.category}</span>
+            <h5 className="card-title fw-semibold">{article.title}</h5>
+            <p className="text-muted small mb-0">
+              <Clock size={14} className="me-1" />
+              {article.date}
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </Link>
 );
 
 // Market Widget Component
@@ -243,12 +248,17 @@ function FrontPage() {
         if (data.length > 0) {
           const formattedPosts = data.map((post) => ({
             id: post._id || post.id,
+            slug: post.slug,
             title: post.title,
             excerpt: post.excerpt || (post.content ? post.content.replace(/<[^>]+>/g, '').substring(0, 100) + '...' : ''),
             image: post.image,
             category: post.category?.name || post.category || "News",
             author: "Admin",
-            date: post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "Recently",
+            date: post.createdAt ? new Date(post.createdAt).toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "2-digit",
+            }) : "Recently",
             views: post.views || 0,
           }));
           
@@ -267,14 +277,16 @@ function FrontPage() {
               setTrendingItems(trendingData.map(p => ({
                   img: p.image || "technology,news",
                   title: p.title,
-                  desc: p.excerpt || ""
+                  desc: p.excerpt || "",
+                  slug: p.slug
               })));
               
               const headlineData = shuffled.length > 11 ? shuffled.slice(11, 14) : shuffled.slice(0, 3);
-              setHeadlineItems(headlineData.map(p => [
-                  p.title,
-                  p.excerpt || ""
-              ]));
+              setHeadlineItems(headlineData.map(p => ({
+                  title: p.title,
+                  excerpt: p.excerpt || "",
+                  slug: p.slug
+              })));
           }
         }
       } catch (error) {
@@ -479,9 +491,9 @@ function FrontPage() {
                     <div className="card-body">
                       <h5 className="fw-semibold">{item.title}</h5>
                       <p className="text-secondary">{item.desc}</p>
-                      <a href="#" className="btn btn-sm btn-outline-dark">
+                      <Link to={`/article/${item.slug}`} className="btn btn-sm btn-outline-dark">
                         Read More
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -497,14 +509,14 @@ function FrontPage() {
 
             <div className="list-group">
               {headlineItems.map((item, i) => (
-                <a
+                <Link
                   key={i}
-                  href="#"
+                  to={`/article/${item.slug}`}
                   className="list-group-item list-group-item-action py-3 border-0 border-bottom"
                 >
-                  <h5 className="fw-semibold mb-1">{item[0]}</h5>
-                  <p className="text-secondary mb-0">{item[1]}</p>
-                </a>
+                  <h5 className="fw-semibold mb-1">{item.title}</h5>
+                  <p className="text-secondary mb-0">{item.excerpt}</p>
+                </Link>
               ))}
             </div>
           </div>

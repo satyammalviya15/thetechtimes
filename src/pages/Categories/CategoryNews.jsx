@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Briefcase, TrendingUp, Building2 } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -54,7 +54,11 @@ const TopJobCard = ({ post, featured = false, onClick }) => (
           Admin
         </span>
         <span>
-          🕒 {post.createdAt && new Date(post.createdAt).toLocaleDateString()}
+          🕒 {post.createdAt && new Date(post.createdAt).toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "2-digit",
+          })}
         </span>
         <span>👁 {post.views || 0}</span>
       </div>
@@ -139,7 +143,9 @@ export default function CategoryNews() {
           <div className="col-lg-8">
             {featuredPost && (
               <div className="mb-4">
-                <TopJobCard post={featuredPost} featured />
+                <Link to={`/article/${featuredPost.slug}`} className="text-decoration-none text-dark">
+                  <TopJobCard post={featuredPost} featured />
+                </Link>
               </div>
             )}
 
@@ -149,13 +155,11 @@ export default function CategoryNews() {
                 .slice(0, 10)
                 .map((post) => (
                   <div className="col-md-6 mb-4" key={post._id}>
-                    <TopJobCard
-                      post={post}
-                      onClick={() => {
-                        setFeaturedPost(post);
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
-                    />
+                    <Link to={`/article/${post.slug}`} className="text-decoration-none text-dark">
+                      <TopJobCard
+                        post={post}
+                      />
+                    </Link>
                   </div>
                 ))}
             </div>
@@ -170,9 +174,9 @@ export default function CategoryNews() {
                 </div>
               <div className="list-group list-group-flush">
                 {news.map((t, i) => (
-                  <div key={i} className="list-group-item hover-item">
+                  <Link to={`/article/${t.slug}`} key={i} className="list-group-item list-group-item-action hover-item border-0 border-bottom">
                     {t.title}
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>

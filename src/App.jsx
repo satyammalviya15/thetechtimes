@@ -23,6 +23,7 @@ import TheVideos from "./pages/TheVideos";
 import AuthSuccess from "./auth/AuthSucess";
 import CategoryNews from "./pages/Categories/CategoryNews";
 import SearchModal from "./components/SearchModal";
+import NewsDetail from "./pages/NewsDetail";
 
 function App() {
   const location = useLocation();
@@ -34,7 +35,6 @@ function App() {
   return (
     <>
       {!hideHeaderFooter && <Header />}
-      <SearchModal />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/weareworkingonthat" element={<UnderConstruction />} />
@@ -58,6 +58,7 @@ function App() {
          <Route path="/news/:category" element={<CategoryNews />} />
          <Route path="/business/:category" element={<CategoryNews />} />
          <Route path="/careers/:category" element={<CategoryNews />} />
+         <Route path="/article/:slug" element={<NewsDetail />} />
       </Routes>
       {!hideHeaderFooter && <Footer />}
     </>

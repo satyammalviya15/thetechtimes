@@ -88,7 +88,7 @@ const SearchModal = () => {
     if (results.length === 0) return;
     if (e.key === "ArrowDown") { e.preventDefault(); setActiveIndex((p) => (p < results.length - 1 ? p + 1 : 0)); }
     if (e.key === "ArrowUp") { e.preventDefault(); setActiveIndex((p) => (p > 0 ? p - 1 : results.length - 1)); }
-    if (e.key === "Enter" && activeIndex >= 0) window.location.href = `/news/${results[activeIndex].slug}`;
+    if (e.key === "Enter" && activeIndex >= 0) window.location.href = `/article/${results[activeIndex].slug}`;
   };
 
   const highlightText = (text) => {
@@ -203,7 +203,7 @@ const SearchModal = () => {
                   {results.map((item, index) => (
                     <a
                       key={item._id}
-                      href={`/news/${item.slug}`}
+                      href={`/article/${item.slug}`}
                       className="d-flex gap-3 align-items-center text-decoration-none p-2"
                       style={{
                         borderRadius: "10px",
@@ -257,7 +257,11 @@ const SearchModal = () => {
                           )}
                           {item.publishedAt && (
                             <span className="text-muted" style={{ fontSize: "11px" }}>
-                              {new Date(item.publishedAt).toLocaleDateString()}
+                              {new Date(item.publishedAt).toLocaleDateString("en-GB", {
+                                day: "2-digit",
+                                month: "2-digit",
+                                year: "2-digit",
+                              })}
                             </span>
                           )}
                         </div>
