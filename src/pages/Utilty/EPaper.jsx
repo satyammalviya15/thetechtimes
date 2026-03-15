@@ -163,7 +163,7 @@ const EPaper = () => {
           <div className="d-flex justify-content-between align-items-end mb-1 small fw-black text-uppercase border-bottom border-dark border-2 pb-1">
             <span>Vol. XLII --- No. 156</span>
             <span className="fs-6 fw-black text-danger px-3 border border-danger border-2 mb-1">THE TECH TIMES</span>
-            <span>Price: ₹15.00</span>
+            <span>Price: ₹1.00</span>
 
           </div>
           <h1 className="masthead-title display-1 fw-black py-1">THE TECH TIMES</h1>
