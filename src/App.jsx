@@ -43,7 +43,6 @@ import Columns from "./pages/Utilty/Columns";
 import Analysis from "./pages/Utilty/Analysis";
 import GuestPosts from "./pages/Utilty/GuestPosts";
 import ReadersCorner from "./pages/Utilty/ReadersCorner";
-import Books from "./pages/Utilty/Books";
 import EBooks from "./pages/Utilty/EBooks";
 import FreeResources from "./pages/Utilty/FreeResources";
 import Courses from "./pages/Utilty/Courses";
@@ -145,7 +144,7 @@ function App() {
         <Route path="/analysis" element={<Analysis />} />
         <Route path="/guestposts" element={<GuestPosts />} />
         <Route path="/readerscorner" element={<ReadersCorner />} />
-        <Route path="/books" element={<Books />} />
+        <Route path="/books" element={<TheBook />} />
         <Route path="/e-books" element={<EBooks />} />
         <Route path="/freeresources" element={<FreeResources />} />
         <Route path="/courses" element={<Courses />} />

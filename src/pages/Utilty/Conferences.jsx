@@ -10,7 +10,7 @@ const Conferences = () => {
         <div className="card border-0 shadow-lg bg-dark text-white p-5 rounded-4 mb-5 overflow-hidden position-relative">
           <div className="position-relative z-index-1">
             <h2 className="display-5 fw-bold mb-3">The Tech Expo 2026</h2>
-            <p className="mb-4">October 12-14 | Mumbai Exhibition Centre</p>
+            <p className="mb-4">There are no active conferences right now </p>
             <button className="btn btn-primary btn-lg px-5">Explore Conference</button>
           </div>
         </div>

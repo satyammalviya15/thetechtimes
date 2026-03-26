@@ -8,30 +8,6 @@ const AdvertiseWithUs = () => {
         <p className="lead text-muted">Connect your brand with the world's most influential tech audience.</p>
       </div>
 
-      <div className="row g-4 mb-5">
-        <div className="col-md-4">
-          <div className="card h-100 border-0 shadow-sm p-4 text-center">
-            <h1 className="display-4 text-danger mb-3 font-weight-bold">2M+</h1>
-            <h5>Monthly Readers</h5>
-            <p className="small text-muted">Reach a vast audience of tech enthusiasts and decision makers.</p>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card h-100 border-0 shadow-sm p-4 text-center">
-            <h1 className="display-4 text-danger mb-3 font-weight-bold">85%</h1>
-            <h5>Professionals</h5>
-            <p className="small text-muted">Our core audience consists of developers, CTOs, and entrepreneurs.</p>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card h-100 border-0 shadow-sm p-4 text-center">
-            <h1 className="display-4 text-danger mb-3 font-weight-bold">150+</h1>
-            <h5>Countries</h5>
-            <p className="small text-muted">Global presence with deep penetration in fast-growing markets.</p>
-          </div>
-        </div>
-      </div>
-
       <div className="row align-items-center mb-5">
         <div className="col-lg-6">
           <h2 className="mb-4">Advertising Solutions</h2>
@@ -61,7 +37,7 @@ const AdvertiseWithUs = () => {
 
       <div className="text-center py-5 border-top">
         <h3>Ready to start?</h3>
-        <p className="text-muted">Reach out to our sales team at <strong>ads@thetechtimes.com</strong></p>
+        <p className="text-muted">Reach out to our sales team at <strong>natrajtechstudio@gmail.com</strong></p>
       </div>
     </div>
   );

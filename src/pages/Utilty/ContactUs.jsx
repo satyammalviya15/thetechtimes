@@ -80,27 +80,27 @@ const ContactUs = () => {
         <div className="col-lg-6">
           <div className="p-4">
             <h3 className="mb-4">Other ways to connect</h3>
-            
+{/*             
             <div className="mb-4">
               <h5 className="mb-2"><i className="bi bi-geo-alt-fill me-2"></i> Address</h5>
               <p className="text-muted">
                 12nd Floor, Tech Tower, BKC,<br />
                 Mumbai, Maharashtra 400051, India
               </p>
-            </div>
+            </div> */}
 
             <div className="mb-4">
               <h5 className="mb-2"><i className="bi bi-envelope-fill me-2"></i> Email</h5>
               <p className="text-muted">
-                General Queries: <strong>info@thetechtimes.com</strong><br />
-                Editorial: <strong>editor@thetechtimes.com</strong><br />
-                Support: <strong>support@thetechtimes.com</strong>
+                General Queries: <strong>thetechtimes@gmail.com</strong><br />
+                Editorial: <strong>satyammalviya281@gmail.com</strong><br />
+                {/* Support: <strong>thetechtimes@gmail.com</strong> */}
               </p>
             </div>
 
             <div className="mb-4">
               <h5 className="mb-2"><i className="bi bi-telephone-fill me-2"></i> Phone</h5>
-              <p className="text-muted">+91 (22) 1234-5678</p>
+              <p className="text-muted">+91 9479415356</p>
             </div>
 
             <div className="mt-5">
