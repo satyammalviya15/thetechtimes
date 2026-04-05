@@ -65,13 +65,13 @@ function Header() {
                     month: "long",
                     year: "numeric",
                   })}
-                  <a
+                  {/* <a
                     className="navbar-brand fs-6 pointer"
                     style={{ marginLeft: "8px" }}
                     onClick={() => closeOffcanvasAndNavigate("/epaper")}
                   >
                     e-Paper
-                  </a>
+                  </a> */}
 
                 </span>
                 <button
@@ -198,13 +198,13 @@ function Header() {
                       className="row text-start shadow-sm"
                       style={{ border: "0px", textDecoration: "none" }}
                     >
-                      <div
+                      {/* <div
                         onClick={() => closeOffcanvasAndNavigate("videos")}
                         className="col-6 border-bottom border-dark py-1 black"
                       >
                         <img src={play} width={25} height={25} alt="" />
                         <a className="navbar-brand red">Videos</a>
-                      </div>
+                      </div> */}
 
                       <div
                         onClick={() => closeOffcanvasAndNavigate("thebook")}
@@ -214,21 +214,21 @@ function Header() {
                         <a className="navbar-brand red">eBooks</a>
                       </div>
 
-                      <div
+                      {/* <div
                         onClick={() => closeOffcanvasAndNavigate("podcast")}
                         className="col-6 border-bottom border-dark py-1 black"
                       >
                         <img src={headphone} width={25} height={25} alt="" />
                         <a className="navbar-brand red">Podcast</a>
-                      </div>
+                      </div> */}
 
-                      <div
+                      {/* <div
                         onClick={() => closeOffcanvasAndNavigate("crossword")}
                         className="col-6 border-bottom border-dark py-1 black"
                       >
                         <img src={crossword} width={25} height={25} alt="" />
                         <a className="navbar-brand red">Crossword</a>
-                      </div>
+                      </div> */}
 
                       <div
                         onClick={() => closeOffcanvasAndNavigate("photos")}
@@ -270,13 +270,13 @@ function Header() {
                         <a className="navbar-brand red">Specials</a>
                       </div>
 
-                      <div
+                      {/* <div
                         onClick={() => closeOffcanvasAndNavigate("thehuddle")}
                         className="col-6 border-bottom border-dark py-1 black"
                       >
                         <img src={puzzle} width={25} height={25} alt="" />
                         <a className="navbar-brand red">The Huddle</a>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   <div className="container mt-4">
@@ -320,6 +320,7 @@ function Header() {
                     </div>
                   </div>
                 </div>
+                {/* The Social Media */}
                 <div className="dropdown mt-3">
                   <div className="col-6 py-1 flex-column">
                     <div>Connect with us</div>
@@ -352,13 +353,13 @@ function Header() {
                 month: "long",
                 year: "numeric",
               })}
-              <a 
+              {/* <a 
                 className="navbar-brand fs-6 pointer" 
                 style={{ marginLeft: "8px" }}
                 onClick={() => navigate("/epaper")}
               >
                 e-Paper
-              </a>
+              </a> */}
             </span>
 
             <span className="title pointer" onClick={() => navigate("/")}>

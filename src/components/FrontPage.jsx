@@ -16,7 +16,7 @@ import natrajAdBg from "../assets/natraj_ad_bg.png";
 
 
 // External Data Dependencies (crypto, stocks, metals, etc.) remain as static variables for now
-const cryptoData = [
+const defaultCryptoData = [
   { name: "Bitcoin", symbol: "BTC", price: 67234.56, change: 2.45, isUp: true },
   { name: "Ethereum", symbol: "ETH", price: 3456.78, change: 1.23, isUp: true },
   { name: "Solana", symbol: "SOL", price: 145.32, change: -0.87, isUp: false },
@@ -36,23 +36,83 @@ const stockData = [
   { name: "NVIDIA", symbol: "NVDA", price: 875.23, change: 2.3, isUp: true },
 ];
 
-const metalPrices = [
-  { name: "Gold", price: 2045.3, unit: "oz", change: 0.45, isUp: true },
-  { name: "Silver", price: 24.67, unit: "oz", change: -0.23, isUp: false },
+const defaultMetalPrices = [
+  { name: "Gold", price: 657.49, unit: "10g", change: 0.45, isUp: true },
+  { name: "Silver", price: 793.17, unit: "1kg", change: -0.23, isUp: false },
 ];
 
-const quizOfTheDay = {
-  question:
-    "Which company recently achieved a breakthrough in quantum computing by creating a 1000-qubit processor?",
-  options: ["Google", "IBM", "Microsoft", "Intel"],
-  correctAnswer: 1,
-  explanation:
-    "IBM announced their 1000-qubit quantum processor in 2024, marking a major milestone in quantum computing.",
+
+const fallbackQuizzes = [
+  {
+    question: "Which company recently achieved a breakthrough in quantum computing by creating a 1000-qubit processor?",
+    options: ["Google", "IBM", "Microsoft", "Intel"],
+    correctAnswer: 1,
+    explanation: "IBM announced their 1000-qubit quantum processor in 2024, marking a major milestone in quantum computing.",
+    category: "Technology"
+  },
+  {
+    question: "What does CSS stand for in web development?",
+    options: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style Sheets", "Colorful Style Sheets"],
+    correctAnswer: 1,
+    explanation: "CSS stands for Cascading Style Sheets, used for describing the presentation of a document written in HTML.",
+    category: "Web Development"
+  },
+  {
+    question: "Which planet is known as the Red Planet?",
+    options: ["Venus", "Jupiter", "Mars", "Saturn"],
+    correctAnswer: 2,
+    explanation: "Mars is often called the Red Planet due to the iron oxide prevalent on its surface.",
+    category: "Science"
+  }
+];
+
+const getRandomFallbackQuiz = () => fallbackQuizzes[Math.floor(Math.random() * fallbackQuizzes.length)];
+
+const decodeHTMLEntities = (text) => {
+  const textArea = document.createElement('textarea');
+  textArea.innerHTML = text;
+  return textArea.value;
+};
+
+const fetchQuizDataFn = async (retryCount = 0) => {
+  try {
+    const res = await axios.get("https://opentdb.com/api.php?amount=1&type=multiple");
+    
+    if (res.data && res.data.response_code === 5) {
+      if (retryCount < 4) {
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        return fetchQuizDataFn(retryCount + 1);
+      } else {
+        console.warn("Quiz API rate limit exceeded. Using fallback.");
+        return getRandomFallbackQuiz();
+      }
+    }
+
+    if (res.data && res.data.results && res.data.results.length > 0) {
+      const item = res.data.results[0];
+      const correct = decodeHTMLEntities(item.correct_answer);
+      const incorrect = item.incorrect_answers.map(ans => decodeHTMLEntities(ans));
+      
+      const allOptions = [...incorrect, correct].sort(() => Math.random() - 0.5);
+      const correctIndex = allOptions.indexOf(correct);
+
+      return {
+        question: decodeHTMLEntities(item.question),
+        options: allOptions,
+        correctAnswer: correctIndex,
+        explanation: `The correct answer is ${correct}.`,
+        category: decodeHTMLEntities(item.category)
+      };
+    }
+  } catch (err) {
+    console.warn("Failed to fetch quiz. Using fallback.");
+  }
+  return getRandomFallbackQuiz();
 };
 
 // Top Post Card Component
 const TopPostCard = ({ post, featured = false }) => (
-  <Link to={`/article/${post.slug || post.id}`} className="text-decoration-none text-dark">
+  <Link to={`/article/${post.slug || post.id}`} className="text-decoration-none text-dark d-block h-100">
     <div
       className={`card h-100 border-0 shadow-sm overflow-hidden hover-card ${
         featured ? "featured-post" : ""
@@ -95,7 +155,7 @@ const TopPostCard = ({ post, featured = false }) => (
 
 // News Card Component
 const NewsCard = ({ article }) => (
-  <Link to={`/article/${article.slug || article.id}`} className="text-decoration-none text-dark">
+  <Link to={`/article/${article.slug || article.id}`} className="text-decoration-none text-dark d-block">
     <div className="card border-0 shadow-sm mb-3 hover-card">
       <div className="row g-0">
         <div className="col-4">
@@ -140,7 +200,14 @@ const MarketWidget = ({ title, data, type = "crypto" }) => (
               <small className="text-muted">{item.symbol || item.unit}</small>
             </div>
             <div className="text-end">
-              <div className="fw-bold">${item.price.toLocaleString()}</div>
+              <div className="fw-bold">
+                ${item.price.toLocaleString("en-US", { maximumFractionDigits: 2 })}
+              </div>
+              {item.priceINR && (
+                <div className="text-muted small mb-1">
+                  ₹{item.priceINR.toLocaleString("en-IN", { maximumFractionDigits: 2 })}
+                </div>
+              )}
               <small className={item.isUp ? "text-success" : "text-danger"}>
                 {item.isUp ? (
                   <TrendingUp size={14} />
@@ -159,35 +226,75 @@ const MarketWidget = ({ title, data, type = "crypto" }) => (
 );
 
 // Quiz Component
-const QuizOfTheDay = () => {
+const QuizOfTheDay = ({ initialData }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showResult, setShowResult] = useState(false);
+  const [quizData, setQuizData] = useState(initialData);
+  const [loading, setLoading] = useState(false);
+
+  const handleNextQuiz = async () => {
+    setLoading(true);
+    setShowResult(false);
+    setSelectedAnswer(null);
+    const newQuiz = await fetchQuizDataFn();
+    if (newQuiz) {
+      setQuizData(newQuiz);
+    }
+    setLoading(false);
+  };
 
   const handleAnswer = (index) => {
     setSelectedAnswer(index);
     setShowResult(true);
   };
 
-  const resetQuiz = () => {
-    setSelectedAnswer(null);
-    setShowResult(false);
-  };
+  if (loading || !quizData) {
+    return (
+      <div className="card border-0 shadow-sm mb-4">
+        <div className="card-header bg-warning text-dark fw-semibold d-flex justify-content-between align-items-center">
+          <div>
+            <Award size={18} className="me-2" />
+            Quiz of the Day
+          </div>
+          <span className="badge bg-dark bg-opacity-50 small placeholder-glow">
+            <span className="placeholder col-12" style={{ width: '50px' }}></span>
+          </span>
+        </div>
+        <div className="card-body" aria-hidden="true">
+          <p className="placeholder-glow mb-4">
+            <span className="placeholder col-12 mb-2 bg-secondary bg-opacity-25 rounded"></span>
+            <span className="placeholder col-9 mb-2 bg-secondary bg-opacity-25 rounded"></span>
+            <span className="placeholder col-6 bg-secondary bg-opacity-25 rounded"></span>
+          </p>
+          <div className="d-grid gap-2 placeholder-glow">
+            <div className="btn btn-outline-secondary disabled placeholder col-12 text-start" style={{ height: "38px", borderStyle: "dashed" }}></div>
+            <div className="btn btn-outline-secondary disabled placeholder col-12 text-start" style={{ height: "38px", borderStyle: "dashed" }}></div>
+            <div className="btn btn-outline-secondary disabled placeholder col-12 text-start" style={{ height: "38px", borderStyle: "dashed" }}></div>
+            <div className="btn btn-outline-secondary disabled placeholder col-12 text-start" style={{ height: "38px", borderStyle: "dashed" }}></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="card border-0 shadow-sm mb-4">
-      <div className="card-header bg-warning text-dark fw-semibold">
-        <Award size={18} className="me-2" />
-        Quiz of the Day
+      <div className="card-header bg-warning text-dark fw-semibold d-flex justify-content-between align-items-center">
+        <div>
+          <Award size={18} className="me-2" />
+          Quiz of the Day
+        </div>
+        <span className="badge bg-dark bg-opacity-75 small">{quizData.category}</span>
       </div>
       <div className="card-body">
-        <h5 className="mb-4">{quizOfTheDay.question}</h5>
+        <h6 className="mb-4 text-dark lh-base">{quizData.question}</h6>
         <div className="d-grid gap-2">
-          {quizOfTheDay.options.map((option, idx) => (
+          {quizData.options.map((option, idx) => (
             <button
               key={idx}
               className={`btn text-start ${
                 showResult
-                  ? idx === quizOfTheDay.correctAnswer
+                  ? idx === quizData.correctAnswer
                     ? "btn-success"
                     : idx === selectedAnswer
                     ? "btn-danger"
@@ -198,10 +305,10 @@ const QuizOfTheDay = () => {
               disabled={showResult}
             >
               {option}
-              {showResult && idx === quizOfTheDay.correctAnswer && " ✓"}
+              {showResult && idx === quizData.correctAnswer && " ✓"}
               {showResult &&
                 idx === selectedAnswer &&
-                idx !== quizOfTheDay.correctAnswer &&
+                idx !== quizData.correctAnswer &&
                 " ✗"}
             </button>
           ))}
@@ -209,22 +316,22 @@ const QuizOfTheDay = () => {
         {showResult && (
           <div
             className={`alert ${
-              selectedAnswer === quizOfTheDay.correctAnswer
+              selectedAnswer === quizData.correctAnswer
                 ? "alert-success"
                 : "alert-info"
             } mt-3 mb-0`}
           >
             <strong>
-              {selectedAnswer === quizOfTheDay.correctAnswer
+              {selectedAnswer === quizData.correctAnswer
                 ? "🎉 Correct!"
                 : "📚 Learn:"}
             </strong>
-            <p className="mb-0 mt-2 small">{quizOfTheDay.explanation}</p>
+            <p className="mb-0 mt-2 small">{quizData.explanation}</p>
             <button
-              className="btn btn-sm btn-outline-secondary mt-2"
-              onClick={resetQuiz}
+              className="btn btn-sm btn-outline-dark mt-3 w-100 fw-semibold"
+              onClick={handleNextQuiz}
             >
-              Try Again
+              Next Question
             </button>
           </div>
         )}
@@ -238,14 +345,120 @@ function FrontPage() {
   const [trendingItems, setTrendingItems] = useState([]);
   const [headlineItems, setHeadlineItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [initialQuizData, setInitialQuizData] = useState(null);
+
+  const [cryptoWidgetData, setCryptoWidgetData] = useState(defaultCryptoData);
+  const [metalWidgetData, setMetalWidgetData] = useState(defaultMetalPrices);
   
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
-    const fetchNews = async () => {
+    const fetchMarketData = async () => {
       try {
-        const res = await axios.get(`${BACKEND_URL}/api/news`);
-        const data = res.data?.data || [];
+        const cacheKey = "market_data_cache_v3";
+        const cached = localStorage.getItem(cacheKey);
+        if (cached) {
+          const { data, timestamp } = JSON.parse(cached);
+          if (Date.now() - timestamp < 60000) { // 1 minute cache
+             setCryptoWidgetData(data.crypto);
+             setMetalWidgetData(data.metals);
+             return;
+          }
+        }
+
+        const symbols = ["BTC", "ETH", "XAU", "XAG"];
+        const usdResponses = await Promise.allSettled(
+          symbols.map(sym => axios.get(`https://api.gold-api.com/price/${sym}/USD`))
+        );
+        const inrResponses = await Promise.allSettled(
+          symbols.map(sym => axios.get(`https://api.gold-api.com/price/${sym}/INR`))
+        );
+
+        let newCrypto = [...defaultCryptoData];
+        let newMetals = [...defaultMetalPrices];
+
+        symbols.forEach((sym, idx) => {
+           const usdRes = usdResponses[idx];
+           const inrRes = inrResponses[idx];
+
+           if (usdRes.status === "fulfilled") {
+              const usdPrice = usdRes.value.data.price;
+              const inrPrice = inrRes.status === "fulfilled" ? inrRes.value.data.price : null;
+
+              if (sym === "BTC" || sym === "ETH") {
+                 const index = newCrypto.findIndex(c => c.symbol === sym);
+                 if (index !== -1) {
+                    const oldPrice = newCrypto[index].price;
+                    const change = (((usdPrice - oldPrice) / oldPrice) * 100);
+                    newCrypto[index] = {
+                      ...newCrypto[index],
+                      price: usdPrice,
+                      change: parseFloat(Math.abs(change).toFixed(2)),
+                      isUp: change >= 0
+                    };
+                 }
+              } else if (sym === "XAU" || sym === "XAG") {
+                 const name = sym === "XAU" ? "Gold" : "Silver";
+                 const index = newMetals.findIndex(m => m.name === name);
+                 if (index !== -1) {
+                    const troyOunceInGrams = 31.1034768;
+                    let displayUsdPrice = usdPrice;
+                    let displayInrPrice = inrPrice;
+                    let unit = "oz";
+
+                    if (sym === "XAU") {
+                       // Convert to 10 grams for Gold
+                       displayUsdPrice = (usdPrice / troyOunceInGrams) * 10;
+                       displayInrPrice = inrPrice ? (inrPrice / troyOunceInGrams) * 10 : null;
+                       unit = "10g";
+                    } else if (sym === "XAG") {
+                       // Convert to 1 kg for Silver
+                       displayUsdPrice = (usdPrice / troyOunceInGrams) * 1000;
+                       displayInrPrice = inrPrice ? (inrPrice / troyOunceInGrams) * 1000 : null;
+                       unit = "1kg";
+                    }
+
+                    // If existing mock data has same unit, we can compute accurate change
+                    // otherwise skip or just use a proxy. Since we updated defaultMetalPrices, they have the correct unit.
+                    const oldPrice = newMetals[index].price;
+                    const change = (((displayUsdPrice - oldPrice) / oldPrice) * 100);
+                    newMetals[index] = {
+                      ...newMetals[index],
+                      price: displayUsdPrice,
+                      priceINR: displayInrPrice,
+                      unit: unit,
+                      change: parseFloat(Math.abs(change).toFixed(2)),
+                      isUp: change >= 0
+                    };
+                 }
+              }
+           }
+        });
+
+        setCryptoWidgetData(newCrypto);
+        setMetalWidgetData(newMetals);
+
+        localStorage.setItem(cacheKey, JSON.stringify({
+           timestamp: Date.now(),
+           data: { crypto: newCrypto, metals: newMetals }
+        }));
+      } catch (err) {
+        console.error("Error fetching market data", err);
+      }
+    };
+
+    fetchMarketData();
+  }, []);
+
+  useEffect(() => {
+    const fetchNewsAndQuiz = async () => {
+      try {
+        const [newsRes, quizRes] = await Promise.all([
+          axios.get(`${BACKEND_URL}/api/news`).catch(() => ({ data: { data: [] } })),
+          fetchQuizDataFn()
+        ]);
+        
+        const data = newsRes.data?.data || [];
         
         if (data.length > 0) {
           const formattedPosts = data.map((post) => ({
@@ -265,17 +478,10 @@ function FrontPage() {
           }));
           
           if (formattedPosts.length > 0) {
-              // Shuffle on every load so visitors see different articles each visit
-              const shuffled = [...formattedPosts];
-              for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-              }
-
-              setTopPostItems(shuffled.slice(0, 3));
-              setNewsArticleItems(shuffled.slice(3, 8));
+              setTopPostItems(formattedPosts.slice(0, 3));
+              setNewsArticleItems(formattedPosts.slice(3, 8));
               
-              const trendingData = shuffled.length > 8 ? shuffled.slice(8, 11) : shuffled.slice(0, 3);
+              const trendingData = formattedPosts.length > 8 ? formattedPosts.slice(8, 11) : formattedPosts.slice(0, 3);
               setTrendingItems(trendingData.map(p => ({
                   img: p.image || "technology,news",
                   title: p.title,
@@ -283,7 +489,7 @@ function FrontPage() {
                   slug: p.slug
               })));
               
-              const headlineData = shuffled.length > 11 ? shuffled.slice(11, 14) : shuffled.slice(0, 3);
+              const headlineData = formattedPosts.length > 11 ? formattedPosts.slice(11, 14) : formattedPosts.slice(0, 3);
               setHeadlineItems(headlineData.map(p => ({
                   title: p.title,
                   excerpt: p.excerpt || "",
@@ -291,20 +497,73 @@ function FrontPage() {
               })));
           }
         }
+
+        if (quizRes) {
+           setInitialQuizData(quizRes);
+        }
       } catch (error) {
-        console.error("Error fetching news:", error);
+        console.error("Error fetching news and quiz:", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchNews();
+    fetchNewsAndQuiz();
   }, []);
 
   if (loading) {
     return (
-      <div className="d-flex justify-content-center align-items-center min-vh-100">
-        <div className="spinner-border text-dark" role="status">
-          <span className="visually-hidden">Loading...</span>
+      <div className="min-vh-100 placeholder-glow">
+        <div className="container py-4">
+          <div className="row">
+            {/* Main Content - Left Column Simple Skeleton */}
+            <div className="col-lg-8">
+              {/* Featured Top Post */}
+              <div className="mb-4">
+                <div className="placeholder bg-secondary bg-opacity-25 w-100 rounded mb-2" style={{ height: "400px" }}></div>
+                <span className="placeholder bg-secondary bg-opacity-25 col-8 rounded" style={{ height: "30px", display: "block" }}></span>
+              </div>
+              
+              {/* Secondary Top Posts */}
+              <div className="row mb-5">
+                {[1, 2].map((i) => (
+                  <div key={i} className="col-md-6 mb-4">
+                    <div className="placeholder bg-secondary bg-opacity-25 w-100 rounded mb-2" style={{ height: "200px" }}></div>
+                    <span className="placeholder bg-secondary bg-opacity-25 col-10 rounded" style={{ height: "20px", display: "block" }}></span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Latest News Skeletons */}
+              <div className="mb-4">
+                <span className="placeholder bg-secondary bg-opacity-25 col-4 rounded mb-4" style={{ height: "35px", display: "block" }}></span>
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={`news-${i}`} className="d-flex mb-4">
+                     <div className="placeholder bg-secondary bg-opacity-25 rounded me-3" style={{ width: "150px", height: "100px" }}></div>
+                     <div className="w-100 pt-2">
+                        <span className="placeholder bg-secondary bg-opacity-25 col-12 rounded mb-2" style={{ height: "20px", display: "block" }}></span>
+                        <span className="placeholder bg-secondary bg-opacity-25 col-9 rounded" style={{ height: "20px", display: "block" }}></span>
+                     </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Sidebar - Right Column Simple Skeleton */}
+            <div className="col-lg-4 ps-lg-4">
+               {[1, 2, 3, 4].map(widget => (
+                 <div key={`widget-${widget}`} className="card border-0 shadow-sm mb-4">
+                   <div className="card-header bg-secondary bg-opacity-10 py-3">
+                     <span className="placeholder bg-secondary bg-opacity-25 col-6 rounded" style={{ height: "20px" }}></span>
+                   </div>
+                   <div className="card-body p-4">
+                     <span className="placeholder bg-secondary bg-opacity-25 col-12 rounded mb-3" style={{ height: "40px", display: "block" }}></span>
+                     <span className="placeholder bg-secondary bg-opacity-25 col-12 rounded mb-3" style={{ height: "40px", display: "block" }}></span>
+                     <span className="placeholder bg-secondary bg-opacity-25 col-12 rounded mb-3" style={{ height: "40px", display: "block" }}></span>
+                   </div>
+                 </div>
+               ))}
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -350,10 +609,20 @@ function FrontPage() {
 
             {/* Sidebar - Right Column */}
             <div className="col-lg-4">
+              {/* Quiz of the Day */}
+              <QuizOfTheDay initialData={initialQuizData} />
+
+              {/* Gold & Silver Prices */}
+              <MarketWidget
+                title="Precious Metals"
+                data={metalWidgetData}
+                type="metals"
+              />
+
               {/* Trending Crypto */}
               <MarketWidget
                 title="Trending Crypto"
-                data={cryptoData}
+                data={cryptoWidgetData}
                 type="crypto"
               />
 
@@ -363,16 +632,6 @@ function FrontPage() {
                 data={stockData}
                 type="stocks"
               />
-
-              {/* Gold & Silver Prices */}
-              <MarketWidget
-                title="Precious Metals"
-                data={metalPrices}
-                type="metals"
-              />
-
-              {/* Quiz of the Day */}
-              <QuizOfTheDay />
 
               {/* Ad Space */}
               <a href="https://natrajtech.com" target="_blank" rel="noopener noreferrer" className="text-decoration-none">

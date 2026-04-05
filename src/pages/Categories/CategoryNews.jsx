@@ -97,15 +97,8 @@ export default function CategoryNews() {
 
       const data = res.data?.data || [];
 
-      // Shuffle so category pages show a different order each load
-      const shuffled = [...data];
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-      }
-
-      if (shuffled.length > 0) setFeaturedPost(shuffled[0]);
-      setNews(shuffled);
+      if (data.length > 0) setFeaturedPost(data[0]);
+      setNews(data);
     } catch (err) {
       console.error(err);
       setFeaturedPost(null);
