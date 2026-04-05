@@ -110,7 +110,6 @@ const SearchModal = () => {
       id="searchModal"
       ref={modalRef}
       tabIndex="-1"
-      onHide={handleClose}
     >
       <div className="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div

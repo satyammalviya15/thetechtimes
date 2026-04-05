@@ -246,13 +246,13 @@ function Header() {
                         <a className="navbar-brand red">Newsletter</a>
                       </div>
 
-                      <div
+                      {/* <div
                         onClick={() => closeOffcanvasAndNavigate("visualstory")}
                         className="col-6 border-bottom border-dark py-1 black"
                       >
                         <img src={eye} width={25} height={25} alt="" />
                         <a className="navbar-brand red">Visual Story</a>
-                      </div>
+                      </div> */}
 
                       <div
                         onClick={() => closeOffcanvasAndNavigate("litforlife")}
@@ -270,13 +270,13 @@ function Header() {
                         <a className="navbar-brand red">Specials</a>
                       </div>
 
-                      {/* <div
+                      <div
                         onClick={() => closeOffcanvasAndNavigate("thehuddle")}
                         className="col-6 border-bottom border-dark py-1 black"
                       >
                         <img src={puzzle} width={25} height={25} alt="" />
                         <a className="navbar-brand red">The Huddle</a>
-                      </div> */}
+                      </div>
                     </div>
                   </div>
                   <div className="container mt-4">
