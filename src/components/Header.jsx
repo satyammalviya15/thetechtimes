@@ -20,14 +20,31 @@ import telegram from "../assets/telegram.png";
 import whatsapp from "../assets/whatsapp.png";
 import fire from "../assets/fire.gif";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
+import axios from "axios";
 import { NewContext } from "../context/MyContext";
 import { toast } from "react-toastify";
 import SearchModal from "./SearchModal";
+import { Calendar } from "lucide-react";
 
 function Header() {
   let navigate = useNavigate();
   const { token, setToken } = useContext(NewContext);
+  const [todayEvent, setTodayEvent] = useState(null);
+
+  useEffect(() => {
+    const fetchTodayEvent = async () => {
+      try {
+        const response = await axios.get("https://thetechtimesbackend.vercel.app/api/calendar/today");
+        if (response.data && response.data.title) {
+          setTodayEvent(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching today's event:", error);
+      }
+    };
+    fetchTodayEvent();
+  }, []);
 
   const closeOffcanvasAndNavigate = (path) => {
     const offcanvasElement = document.getElementById("offcanvasExample");
@@ -60,11 +77,30 @@ function Header() {
             >
               <div className="offcanvas-header">
                 <span>
-                  {new Date().toLocaleDateString("en-US", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
+                  <div className="d-flex align-items-center gap-2 flex-wrap">
+                    {todayEvent && (
+                      <div 
+                        className="d-flex align-items-center gap-1" 
+                        style={{ 
+                          color: todayEvent.color || "#B00020", 
+                          fontSize: '11px',
+                          letterSpacing: '0.2px',
+                          fontFamily: "'Playfair Display', serif",
+                          fontStyle: 'italic',
+                          fontWeight: '600'
+                        }}
+                      >
+                        <Calendar size={10} /> {todayEvent.title}
+                      </div>
+                    )}
+                    <span className="opacity-75 small">
+                      {new Date().toLocaleDateString("en-US", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </div>
                   {/* <a
                     className="navbar-brand fs-6 pointer"
                     style={{ marginLeft: "8px" }}
@@ -239,7 +275,7 @@ function Header() {
                       </div>
 
                       <div
-                        onClick={() => closeOffcanvasAndNavigate("newsletter")}
+                        onClick={() => closeOffcanvasAndNavigate("premium")}
                         className="col-6 border-bottom border-dark py-1 black"
                       >
                         <img src={newsletter} width={25} height={25} alt="" />
@@ -347,24 +383,42 @@ function Header() {
             </div>
 
             {/* Main Body of Navbar */}
-            <span className="d-none d-lg-block">
-              {new Date().toLocaleDateString("en-US", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-              {/* <a 
-                className="navbar-brand fs-6 pointer" 
-                style={{ marginLeft: "8px" }}
-                onClick={() => navigate("/epaper")}
-              >
-                e-Paper
-              </a> */}
+            <span className="d-none d-lg-flex align-items-center me-lg-5">
+              <span className="text-muted small">
+                {new Date().toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </span>
             </span>
 
-            <span className="title pointer" onClick={() => navigate("/")}>
-              THE TECH TIMES
-              <img className="" src={natrajalogo} alt="I" />
+            <span className="title-container d-flex align-items-center position-relative">
+              {todayEvent && (
+                <div 
+                  className="d-none d-lg-flex align-items-center gap-2 shadow-sm position-absolute"
+                  style={{ 
+                    color: todayEvent.color || "#B00020", 
+                    fontSize: '12px',
+                    fontFamily: "'Playfair Display', serif",
+                    fontStyle: 'italic',
+                    fontWeight: '700',
+                    background: 'rgba(176, 0, 32, 0.03)',
+                    padding: '2px 12px',
+                    borderRadius: '20px',
+                    border: `1px solid ${todayEvent.color || "rgba(176, 0, 32, 0.1)"}`,
+                    right: 'calc(100% + 15px)',
+                    whiteSpace: 'nowrap',
+                    zIndex: 10
+                  }}
+                >
+                  <Calendar size={12} className="mb-0" /> {todayEvent.title}
+                </div>
+              )}
+              <span className="title pointer" onClick={() => navigate("/")}>
+                THE TECH TIMES
+                <img className="" src={natrajalogo} alt="I" />
+              </span>
             </span>
             <span
               className=""
@@ -414,7 +468,7 @@ function Header() {
                   <img src={ebook} alt="I" width={20} height={20} />
                   eBooks
                 </a>
-                <button style={{ fontSize: "12px" }}>SUBSCRIBE</button>
+                <button onClick={() => navigate("/premium")} style={{ fontSize: "12px" }}>SUBSCRIBE</button>
                 <span className="d-inline d-lg-none">
                   <a
                     data-bs-toggle="offcanvas"

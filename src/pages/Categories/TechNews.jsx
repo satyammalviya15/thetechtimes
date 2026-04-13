@@ -87,7 +87,6 @@ const TopTechCard = ({ post, featured = false }) => (
       <div className="d-flex justify-content-between mt-3 text-muted small">
         <span>👤 {post.author}</span>
         <span>🕒 {post.date}</span>
-        <span>👁 {post.views}</span>
       </div>
     </div>
   </div>

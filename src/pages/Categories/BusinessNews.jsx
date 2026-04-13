@@ -76,7 +76,6 @@ const BusinessCard = ({ post, featured }) => (
 
       <div className="d-flex justify-content-between text-muted small">
         <span>🕒 {post.date}</span>
-        <span>👁 {post.views}</span>
       </div>
     </div>
   </div>

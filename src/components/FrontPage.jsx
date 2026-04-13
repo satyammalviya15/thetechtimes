@@ -140,14 +140,10 @@ const TopPostCard = ({ post, featured = false }) => (
           {post.title}
         </h3>
         <p className="card-text text-muted">{post.excerpt}</p>
-        <div className="d-flex justify-content-between align-items-center mt-3">
           <div className="text-muted small">
             <span className="me-3">👤 {post.author}</span>
             <span className="me-3">🕐 {post.date}</span>
-            <span>👁️ {post.views}</span>
           </div>
-          <button className="btn btn-outline-black btn-sm">Read More</button>
-        </div>
       </div>
     </div>
   </Link>
@@ -695,7 +691,7 @@ function FrontPage() {
       </div>
       <div style={{ fontFamily: "Georgia, serif" }}>
         {/* Top Highlight */}
-        <section className="container py-4">
+        {/* <section className="container py-4">
           <div
             className="row g-4 flex-nowrap overflow-auto row-cols-1 row-cols-md-4"
             style={{ whiteSpace: "nowrap" }}
@@ -780,7 +776,7 @@ function FrontPage() {
             </div>
 
           </div>
-        </section>
+        </section> */}
 
 
 

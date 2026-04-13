@@ -414,11 +414,11 @@ const Footer = ({ darkMode = false }) => {
                 >
                   <img src={whatsapp} width={20} height={20} alt="WhatsApp" />
                 </Link>
-                <Link
+                 <Link
                   onClick={() =>
                     window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
                   }
-                  to="/newsletter"
+                  to="/premium"
                 >
                   <img src={email} width={20} height={20} alt="Newsletter" />
                 </Link>

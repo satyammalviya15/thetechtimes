@@ -77,7 +77,6 @@ const OpinionCard = ({ post, featured = false }) => (
           <User size={14} className="me-1" /> {post.writer}
         </span>
         <span>🕒 {post.date}</span>
-        <span>👁 {post.views}</span>
       </div>
     </div>
   </div>

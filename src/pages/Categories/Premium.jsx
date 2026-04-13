@@ -18,18 +18,19 @@ const plans = [
   },
   {
     name: "Premium",
-    price: "₹100",
-    period: "/year",
+    price: "₹0",
+    period: "/this year",
     highlight: true,
-    badge: "BEST VALUE",
+    badge: "FREE OFFER 2025",
     btnStyle: { background: "linear-gradient(135deg,#f5c518,#e8a000)", color: "#1a1a1a" },
     benefits: [
+      "Everything in Free, plus:",
       "Unlimited ad-free reading",
       "Exclusive Premium articles",
       "Instant breaking news alerts",
       "Weekly premium newsletter",
       "Saved articles & reading history",
-      "Invitation to Premium events",
+      "Special Year-End Rewards",
     ],
   },
 ];
@@ -87,7 +88,7 @@ export default function PremiumPage() {
             <span style={{ color: "#f5c518" }}>Premium</span>
           </h1>
           <p className="mx-auto mb-5" style={{ color: "#aaa", maxWidth: 520, fontSize: "1.05rem", lineHeight: 1.7 }}>
-            Unlock exclusive access, ad-free reading, and premium journalism trusted by thousands of readers.
+            Unlock exclusive access, ad-free reading, and premium journalism for <span style={{ color: "#fff", fontWeight: "bold" }}>FREE</span> this year. Limited time subscription offer for our community.
           </p>
           <div className="d-flex justify-content-center gap-3 flex-wrap">
             <a href="#plans">

@@ -91,7 +91,7 @@ const EPaper = () => {
         <div className="container d-flex justify-content-between align-items-center x-small uppercase fw-bold opacity-75">
           <div className="d-flex gap-3">
              <span className="cursor-pointer" onClick={() => navigate('/')}>HOME PAGE</span>
-             <span className="cursor-pointer">SUBSCRIBE</span>
+             <span className="cursor-pointer" onClick={() => navigate('/premium')}>SUBSCRIBE</span>
              <span className="cursor-pointer">ADVERTISE</span>
           </div>
           <div className="d-flex align-items-center gap-2">

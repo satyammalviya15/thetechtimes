@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { Briefcase, TrendingUp, Building2 } from "lucide-react";
+import SEO from "../../components/SEO";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import DOMPurify from "dompurify";
@@ -60,7 +61,6 @@ const TopJobCard = ({ post, featured = false, onClick }) => (
             year: "2-digit",
           })}
         </span>
-        <span>👁 {post.views || 0}</span>
       </div>
     </div>
   </div>
@@ -128,6 +128,12 @@ export default function CategoryNews() {
   /* ---------------- MAIN UI ---------------- */
   return (
     <div className="min-vh-100 position-relative">
+      <SEO 
+        title={`${normalizeCategory(category)} News, Latest Updates`}
+        description={`Get the latest news, updates, and breaking stories about ${normalizeCategory(category)} from The Tech Times.`}
+        keywords={`${normalizeCategory(category)}, news, updates, latest news, the tech times`}
+        type="website"
+      />
       {/* ===== CONTENT ===== */}
       <div className={loading ? "content-blur" : ""}>
       <div className="container py-4">

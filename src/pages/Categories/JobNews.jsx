@@ -89,7 +89,6 @@ const TopJobCard = ({ post, featured = false }) => (
           <Building2 size={14} className="me-1" /> {post.company}
         </span>
         <span>🕒 {post.date}</span>
-        <span>👁 {post.views}</span>
       </div>
     </div>
   </div>

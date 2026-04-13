@@ -74,7 +74,6 @@ const ScienceCard = ({ post, featured = false }) => (
       <p className="text-muted small">{post.excerpt}</p>
       <div className="d-flex justify-content-between text-muted small">
         <span>🕒 {post.date}</span>
-        <span>👁 {post.views}</span>
       </div>
     </div>
   </div>

@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const AboutUs = () => {
+  const navigate = useNavigate();
   return (
     <div className="">
 
@@ -210,7 +212,7 @@ const AboutUs = () => {
                   <div className="col-md-6">
                     <div className="input-group input-group-lg">
                       <input type="email" className="form-control" placeholder="Enter your email" />
-                      <button className="btn btn-danger" type="button">
+                      <button onClick={() => navigate("/premium")} className="btn btn-danger" type="button">
                         <i className="bi bi-send me-2"></i>Subscribe
                       </button>
                     </div>

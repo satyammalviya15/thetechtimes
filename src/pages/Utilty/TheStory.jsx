@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { BookOpen, Quote, Clock, Share2, ArrowRight } from "lucide-react";
 
 const TheStory = () => {
+  const navigate = useNavigate();
   return (
     <div className="container py-5">
       <div className="row justify-content-center">
@@ -57,7 +59,7 @@ const TheStory = () => {
           <div className="bg-dark text-white p-5 rounded-5 shadow-xl text-center mt-5">
             <h3 className="fw-bold mb-3">Support Independent Journalism</h3>
             <p className="opacity-75 mb-4">Get unlimited access to "The Story" and our investigative archives.</p>
-            <button className="btn btn-primary rounded-pill px-5 py-2 fw-bold">SUBSCRIBE NOW <ArrowRight size={18} className="ms-2" /></button>
+            <button onClick={() => navigate("/premium")} className="btn btn-primary rounded-pill px-5 py-2 fw-bold">SUBSCRIBE NOW <ArrowRight size={18} className="ms-2" /></button>
           </div>
         </div>
       </div>

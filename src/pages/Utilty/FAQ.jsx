@@ -3,7 +3,7 @@ import React from "react";
 const FAQ = () => {
   const faqs = [
     { q: "What is The Tech Times?", a: "The Tech Times is a premier digital news platform dedicated to documenting the latest breakthroughs in technology, science, and innovation." },
-    { q: "Is registration free?", a: "Yes, you can read a limited number of articles for free. We also offer premium subscriptions for unlimited access and exclusive content." },
+    { q: "Is registration free?", a: "Yes! Currently, we are offering a special promotion where our Premium subscription is completely FREE for this year, giving you unlimited access to all content." },
     { q: "How do I subscribe to the newsletter?", a: "You can subscribe by entering your email at the bottom of any page or through your account settings." },
     { q: "Can I contribute an article?", a: "Absolutely! Check our 'Write For Us' page for submission guidelines and pitching instructions." },
     { q: "How do I report a bug on the website?", a: "Please use the 'Report Issue' link in the footer to provide details about any technical problems you encounter." },

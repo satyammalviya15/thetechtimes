@@ -85,7 +85,6 @@ const TopHealthCard = ({ post, featured = false }) => (
           {post.org}
         </span>
         <span>🕒 {post.date}</span>
-        <span>👁 {post.views}</span>
       </div>
     </div>
   </div>

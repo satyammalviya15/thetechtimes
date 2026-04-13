@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import DOMPurify from "dompurify";
-import { Clock, User, Eye, Share2, Facebook, Twitter, Linkedin, MessageCircle, ArrowLeft, TrendingUp, Link as LinkIcon, Instagram } from "lucide-react";
+import { Clock, User, Share2, Facebook, Twitter, Linkedin, MessageCircle, ArrowLeft, TrendingUp, Link as LinkIcon, Instagram } from "lucide-react";
 import { toast } from "react-toastify";
+import SEO from "../components/SEO";
 
 const NewsDetail = () => {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const [news, setNews] = useState(null);
   const [loading, setLoading] = useState(true);
   const [relatedNews, setRelatedNews] = useState([]);
@@ -96,8 +98,46 @@ const NewsDetail = () => {
       })
     : "Recently";
 
+  // Generate comma-separated tags for keywords
+  const keywords = news.tags && news.tags.length > 0
+    ? news.tags.map(t => t.name).join(", ")
+    : "technology, news, tech";
+
   return (
     <div className="news-detail-page bg-light min-vh-100 pb-5">
+      {/* SEO & Structured Data */}
+      <SEO 
+        title={news.title}
+        description={news.summary || news.title}
+        keywords={keywords}
+        image={news.image}
+        url={articleUrl}
+        type="article"
+        author={news.author?.name}
+        schemaData={{
+          "@context": "https://schema.org",
+          "@type": "NewsArticle",
+          "headline": news.title,
+          "image": [news.image],
+          "datePublished": news.createdAt,
+          "dateModified": news.updatedAt || news.createdAt,
+          "author": [{
+            "@type": "Person",
+            "name": news.author?.name || "The Tech Times Admin",
+            "url": "https://thetechtimes.in"
+          }],
+          "publisher": {
+            "@type": "Organization",
+            "name": "The Tech Times",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://thetechtimes.in/TT-WhiteLogo.png"
+            }
+          },
+          "description": news.summary || news.title
+        }}
+      />
+      
       <div className="detail-hero position-relative mb-5 overflow-hidden">
         <div className="hero-overlay position-absolute top-0 start-0 w-100 h-100" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%)", zIndex: 1 }}></div>
         <img 
@@ -112,7 +152,6 @@ const NewsDetail = () => {
             <div className="d-flex flex-wrap align-items-center gap-2 gap-md-4 text-white-50 small">
               <span className="d-flex align-items-center gap-2"><User size={18} /> {news.author?.name || "Admin"}</span>
               <span className="d-flex align-items-center gap-2"><Clock size={18} /> {formattedDate}</span>
-              <span className="d-flex align-items-center gap-2"><Eye size={18} /> {news.views} views</span>
             </div>
           </div>
         </div>
@@ -255,7 +294,7 @@ const NewsDetail = () => {
                   <p className="small text-white-50 mb-3">Get the latest tech news delivered right to your inbox daily.</p>
                   <div className="input-group mb-0">
                     <input type="email" className="form-control bg-transparent text-white border-secondary" placeholder="Your Email" />
-                    <button className="btn btn-primary">Join</button>
+                    <button onClick={() => navigate("/premium")} className="btn btn-primary">Join</button>
                   </div>
               </div>
             </div>
