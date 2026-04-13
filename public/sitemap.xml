@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Pages -->
+  <url>
+    <loc>https://thetechtimes.in/</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://thetechtimes.in/technews</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://thetechtimes.in/jobnews</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thetechtimes.in/indianews</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thetechtimes.in/worldnews</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thetechtimes.in/sportsnews</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thetechtimes.in/datanews</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thetechtimes.in/healthnews</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thetechtimes.in/opinionnews</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thetechtimes.in/sciencenews</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thetechtimes.in/businessnews</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thetechtimes.in/premium</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Content Sections -->
+  <url><loc>https://thetechtimes.in/thebook</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/thevideos</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/books</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/e-books</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/podcasts</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/newsletters</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/videos</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/podcast</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+
+  <!-- Educational & Resources -->
+  <url><loc>https://thetechtimes.in/freeresources</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/courses</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/tutorials</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/certifications</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/exampreparation</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/skilldevelopment</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+
+  <!-- Events & Community -->
+  <url><loc>https://thetechtimes.in/events</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/webinars</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/conferences</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/hackathons</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/communitystories</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/startups</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+
+  <!-- Utility & Corporate -->
+  <url><loc>https://thetechtimes.in/aboutus</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://thetechtimes.in/contactus</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://thetechtimes.in/advertisewithus</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://thetechtimes.in/writeforus</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://thetechtimes.in/careers</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/press</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://thetechtimes.in/mediakit</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://thetechtimes.in/helpcenter</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://thetechtimes.in/support</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://thetechtimes.in/faq</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://thetechtimes.in/feedback</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://thetechtimes.in/reportissue</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://thetechtimes.in/disclaimer</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://thetechtimes.in/privacypolicy</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://thetechtimes.in/terms-conditions</loc><lastmod>2026-04-13</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+
+  <!-- Editorial -->
+  <url><loc>https://thetechtimes.in/opinion</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/editorial</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/columns</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/analysis</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/guestposts</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/readerscorner</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+
+  <!-- Special Sections -->
+  <url><loc>https://thetechtimes.in/visualstory</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/litforlife</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/specials</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/thehuddle</loc><lastmod>2026-04-13</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://thetechtimes.in/thestory</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/thetech</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/thejobs</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://thetechtimes.in/epaper</loc><lastmod>2026-04-13</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+</urlset>
