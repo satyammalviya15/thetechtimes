@@ -218,13 +218,13 @@ const NewsDetail = () => {
                 >
                   <Linkedin size={18} />
                 </button>
-                <button 
+                {/* <button 
                   onClick={() => window.open("https://instagram.com", "_blank")} 
                   className="btn btn-outline-danger btn-sm rounded-circle p-2 share-btn" 
                   title="Visit Instagram"
                 >
                   <Instagram size={18} />
-                </button>
+                </button> */}
                 <button 
                   onClick={shareHandlers.copyLink} 
                   className="btn btn-outline-secondary btn-sm rounded-circle p-2 share-btn" 
